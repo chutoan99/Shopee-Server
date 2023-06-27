@@ -18,3 +18,4 @@ npx sequelize-cli db:migrate
 
 DELETE t1 FROM `overviews` t1 INNER JOIN overviews t2 ON t1.id<t2.id AND t1.itemid=t2.itemid
 
+mapbox.com
