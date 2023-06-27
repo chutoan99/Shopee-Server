@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class TierVariation extends Model {
     /**
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       TierVariation.hasOne(models.Cart, {
-        foreignKey: "itemid",
-        as: "tier_variations",
-      });
+        foreignKey: 'itemid',
+        as: 'tier_variations'
+      })
     }
   }
   TierVariation.init(
@@ -20,12 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       itemid: DataTypes.BIGINT,
       name: DataTypes.TEXT,
       option: DataTypes.TEXT,
-      images: DataTypes.TEXT,
+      images: DataTypes.TEXT
     },
     {
       sequelize,
-      modelName: "TierVariation",
+      modelName: 'TierVariation'
     }
-  );
-  return TierVariation;
-};
+  )
+  return TierVariation
+}

@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Overview extends Model {
     /**
@@ -10,17 +10,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Overview.hasOne(models.Cart, {
-        foreignKey: "itemid",
-        as: "detail",
-      });
+        foreignKey: 'itemid',
+        as: 'detail'
+      })
       Overview.hasOne(models.Like, {
-        foreignKey: "itemid",
-        as: "likeDetail",
-      });
+        foreignKey: 'itemid',
+        as: 'likeDetail'
+      })
       Overview.hasOne(models.Order, {
-        foreignKey: "itemid",
-        as: "orderDetail",
-      });
+        foreignKey: 'itemid',
+        as: 'orderDetail'
+      })
     }
   }
   Overview.init(
@@ -45,14 +45,14 @@ module.exports = (sequelize, DataTypes) => {
       ctime: DataTypes.DATE,
       show_free_shipping: DataTypes.BOOLEAN,
       is_official_shop: DataTypes.BOOLEAN,
-      is_service_by_shopee: DataTypes.BOOLEAN,
+      is_service_by_shopee: DataTypes.BOOLEAN
     },
 
     {
       sequelize,
-      modelName: "Overview",
+      modelName: 'Overview'
     }
-  );
+  )
 
-  return Overview;
-};
+  return Overview
+}

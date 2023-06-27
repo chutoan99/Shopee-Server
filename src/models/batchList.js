@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class BatchList extends Model {
     /**
@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       banner_image: DataTypes.STRING,
       title: DataTypes.STRING,
       end: DataTypes.DATE,
-      start: DataTypes.DATE,
+      start: DataTypes.DATE
     },
     {
       sequelize,
-      modelName: "BatchList",
+      modelName: 'BatchList'
     }
-  );
-  return BatchList;
-};
+  )
+  return BatchList
+}

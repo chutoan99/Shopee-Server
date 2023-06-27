@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -10,43 +10,43 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Post.belongsTo(models.Description, {
-        foreignKey: "itemid", //khoa1 phu5
-        targetKey: "itemid",
-        as: "Descriptions",
-      });
+        foreignKey: 'itemid', //khoa1 phu5
+        targetKey: 'itemid',
+        as: 'Descriptions'
+      })
       Post.belongsTo(models.Category, {
-        foreignKey: "itemid",
-        targetKey: "itemid",
-        as: "categories",
-      });
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'categories'
+      })
 
       Post.belongsTo(models.Video, {
-        foreignKey: "itemid",
-        targetKey: "itemid",
-        as: "video",
-      });
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'video'
+      })
 
       Post.belongsTo(models.Attribute, {
-        foreignKey: "itemid",
-        targetKey: "itemid",
-        as: "attributes",
-      });
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'attributes'
+      })
 
       Post.belongsTo(models.Shop, {
-        foreignKey: "shopid",
-        targetKey: "shopid",
-        as: "shop_info",
-      });
+        foreignKey: 'shopid',
+        targetKey: 'shopid',
+        as: 'shop_info'
+      })
       Post.belongsTo(models.DeepDiscountSkin, {
-        foreignKey: "itemid",
-        targetKey: "itemid",
-        as: "deep_discount_skin",
-      });
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'deep_discount_skin'
+      })
       Post.belongsTo(models.VoucherProduct, {
-        foreignKey: "itemid",
-        targetKey: "itemid",
-        as: "voucher",
-      });
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'voucher'
+      })
     }
   }
   Post.init(
@@ -85,12 +85,12 @@ module.exports = (sequelize, DataTypes) => {
       is_deep_discount_skin: DataTypes.BOOLEAN,
       is_video: DataTypes.BOOLEAN,
       is_voucher: DataTypes.BOOLEAN,
-      is_attributes: DataTypes.BOOLEAN,
+      is_attributes: DataTypes.BOOLEAN
     },
     {
       sequelize,
-      modelName: "Post",
+      modelName: 'Post'
     }
-  );
-  return Post;
-};
+  )
+  return Post
+}

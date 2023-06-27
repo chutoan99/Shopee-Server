@@ -1,24 +1,23 @@
-import { Request, Response, NextFunction } from "express";
-import nodemailer from "nodemailer";
-
+import { Response, NextFunction, Request } from 'express'
+import nodemailer from 'nodemailer'
 const sendEmail = (req: any, res: Response, next: NextFunction) => {
-  const { email } = req.body;
+  const { email } = req.body
 
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
     port: 587,
     secure: false,
     auth: {
       user: process.env.USER_EMAIL,
-      pass: process.env.PASS_EMAIL,
-    },
-  });
-  var code = 12345612345;
+      pass: process.env.PASS_EMAIL
+    }
+  })
+  const code = 12345612345
   transporter.sendMail(
     {
       from: process.env.USER_EMAIL,
       to: `${email}`,
-      subject: "Update password", // tieu de
+      subject: 'Update password', // tieu de
       html: ` <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
       style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
       <tr>
@@ -80,19 +79,19 @@ const sendEmail = (req: any, res: Response, next: NextFunction) => {
               </table>
           </td>
       </tr>
-  </table>`,
+  </table>`
     },
     (err: any) => {
       if (err) {
-        return res.json({ mes: err });
+        return res.json({ mes: err })
       } else {
-        const pass = "123456";
-        req.pass = pass;
-        return res.json({ mes: "gửi thành công" });
+        const pass = '123456'
+        req.pass = pass
+        return res.json({ mes: 'gửi thành công' })
       }
     }
-  );
-  req.code = code;
-  next();
-};
-export default sendEmail;
+  )
+  req.code = code
+  next()
+}
+export default sendEmail

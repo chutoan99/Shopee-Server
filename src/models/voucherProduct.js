@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class VoucherProduct extends Model {
     /**
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       VoucherProduct.hasOne(models.VoucherProduct, {
-        foreignKey: "itemid",
-        as: "voucher",
-      });
+        foreignKey: 'itemid',
+        as: 'voucher'
+      })
     }
   }
   VoucherProduct.init(
@@ -20,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       itemid: DataTypes.BIGINT,
       promotion_id: DataTypes.BIGINT,
       voucher_code: DataTypes.STRING,
-      label: DataTypes.STRING,
+      label: DataTypes.STRING
     },
 
     {
       sequelize,
-      modelName: "VoucherProduct",
+      modelName: 'VoucherProduct'
     }
-  );
-  return VoucherProduct;
-};
+  )
+  return VoucherProduct
+}

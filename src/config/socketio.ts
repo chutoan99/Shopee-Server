@@ -11,11 +11,11 @@ const configSocketIO = (app: any) => {
   })
 
   // Event listener for new connections
-  io.on('connection', (socket: any) => {
+  io.on('connection', (socket) => {
     console.log('A user connected')
 
     // Event listener for 'message' event
-    socket.on('message', (data: any) => {
+    socket.on('message', (data) => {
       console.log('Received message:', data)
       socket.emit('message', `You sent: ${data}`)
     })

@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class DeepDiscountSkin extends Model {
     /**
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       DeepDiscountSkin.hasOne(models.Post, {
-        foreignKey: "itemid",
-        as: "deep_discount_skin",
-      });
+        foreignKey: 'itemid',
+        as: 'deep_discount_skin'
+      })
     }
   }
   DeepDiscountSkin.init(
@@ -22,13 +22,13 @@ module.exports = (sequelize, DataTypes) => {
       hidden_promotion_price: DataTypes.STRING,
       text: DataTypes.STRING,
       start_time: DataTypes.DATE,
-      end_time: DataTypes.DATE,
+      end_time: DataTypes.DATE
     },
 
     {
       sequelize,
-      modelName: "DeepDiscountSkin",
+      modelName: 'DeepDiscountSkin'
     }
-  );
-  return DeepDiscountSkin;
-};
+  )
+  return DeepDiscountSkin
+}

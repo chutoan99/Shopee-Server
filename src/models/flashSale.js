@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class FlashSale extends Model {
     /**
@@ -32,14 +32,13 @@ module.exports = (sequelize, DataTypes) => {
       show_free_shipping: DataTypes.BOOLEAN,
       is_official_shop: DataTypes.BOOLEAN,
       is_service_by_shopee: DataTypes.BOOLEAN,
-      show_free_shipping: DataTypes.BOOLEAN,
       start_time: DataTypes.DATE,
-      end_time: DataTypes.DATE,
+      end_time: DataTypes.DATE
     },
     {
       sequelize,
-      modelName: "FlashSale",
+      modelName: 'FlashSale'
     }
-  );
-  return FlashSale;
-};
+  )
+  return FlashSale
+}

@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class HomeCategory extends Model {
     /**
@@ -20,12 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       unselected_image: DataTypes.STRING,
       selected_image: DataTypes.STRING,
-      level: DataTypes.INTEGER,
+      level: DataTypes.INTEGER
     },
     {
       sequelize,
-      modelName: "HomeCategory",
+      modelName: 'HomeCategory'
     }
-  );
-  return HomeCategory;
-};
+  )
+  return HomeCategory
+}
