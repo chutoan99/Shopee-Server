@@ -3,12 +3,12 @@ import http from 'http'
 import cors from 'cors'
 import connectDb from './config/connectDb'
 import configSocketIO from './config/socketio'
-// import initRoutes from './routes/index'
+import initRoutes from './routes/index'
 // Create an Express app
 const app = express()
 app.use(cors())
 connectDb()
-// initRoutes(app)
+initRoutes(app)
 configSocketIO(app)
 
 const server = http.createServer(app)
