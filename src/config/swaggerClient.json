@@ -1,0 +1,874 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SHOPEE API DOCUMENT",
+    "description": "SHOPEE API DOCUMENT",
+    "license": {
+      "name": "ChuToan - Website,  Send email to Truongvanchutoan199@gmail.com",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "server-shopee.onrender.com",
+  "basePath": "/api/client",
+  "tags": [
+    {
+      "name": "Industry",
+      "description": ""
+    },
+
+    {
+      "name": "Banner",
+      "description": ""
+    },
+
+    {
+      "name": "BatchList",
+      "description": ""
+    },
+
+    {
+      "name": "ShopMall",
+      "description": ""
+    },
+
+    {
+      "name": "Notification",
+      "description": ""
+    },
+
+    {
+      "name": "SearchSuggestion",
+      "description": ""
+    },
+
+    {
+      "name": "FlashSale",
+      "description": ""
+    },
+
+    {
+      "name": "TopProduct",
+      "description": ""
+    },
+
+    {
+      "name": "TierVariation",
+      "description": ""
+    },
+
+    {
+      "name": "Like",
+      "description": ""
+    },
+
+    {
+      "name": "Post",
+      "description": ""
+    },
+
+    {
+      "name": "Shop",
+      "description": ""
+    },
+
+    {
+      "name": "Order",
+      "description": ""
+    },
+
+    {
+      "name": "Cart",
+      "description": ""
+    },
+
+    {
+      "name": "User",
+      "description": ""
+    },
+
+    {
+      "name": "Comment",
+      "description": ""
+    },
+
+    {
+      "name": "Auth",
+      "description": ""
+    },
+
+    {
+      "name": "Overview",
+      "description": ""
+    }
+  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/industry": {
+      "get": {
+        "tags": ["Industry"],
+        "summary": "Get all industry in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/banner": {
+      "get": {
+        "tags": ["Banner"],
+        "summary": "Get all banner in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/batchList": {
+      "get": {
+        "tags": ["BatchList"],
+        "summary": "Get all batchList in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/shopMall": {
+      "get": {
+        "tags": ["ShopMall"],
+        "summary": "Get all shopMall in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/notification": {
+      "get": {
+        "tags": ["Notification"],
+        "summary": "Get all notification in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/searchSuggestion": {
+      "get": {
+        "tags": ["SearchSuggestion"],
+        "summary": "Get all searchSuggestion in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/FlashSale": {
+      "get": {
+        "tags": ["FlashSale"],
+        "summary": "Get all flashSale in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/topProduct": {
+      "get": {
+        "tags": ["TopProduct"],
+        "summary": "Get all TopProduct in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/TierVariation/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of itemid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["TierVariation"],
+        "summary": "Get Comment with given ID"
+      }
+    },
+
+    "/like": {
+      "post": {
+        "tags": ["Like"],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Like"],
+        "summary": "Get all Like in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/like/{userid}": {
+      "parameters": [
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Like that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Like"],
+        "summary": "Get Like with given ID"
+      }
+    },
+
+    "/like/{itemid}/{userid}": {
+      "parameters": [
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Like that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Like that we want to find",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": ["Like"],
+        "summary": "Get Like with given ID"
+      }
+    },
+
+    "/post": {
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get all Post in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Post"],
+        "summary": "Get all Post in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/post/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Post that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get Post with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Post"],
+        "summary": "put Post with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Post"],
+        "summary": "delete Post with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/shop": {
+      "get": {
+        "tags": ["Shop"],
+        "summary": "Get all Shop in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Shop"],
+        "summary": "Get all Shop in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/shop/{shopid}": {
+      "parameters": [
+        {
+          "name": "shopid",
+          "in": "path",
+          "required": true,
+          "description": "ID of shopid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Shop"],
+        "summary": "Get Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Shop"],
+        "summary": "put Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Shop"],
+        "summary": "delete Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/order": {
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get all Order in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Order"],
+        "summary": "Get all Order in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/order/{orderid}": {
+      "parameters": [
+        {
+          "name": "orderid",
+          "in": "path",
+          "required": true,
+          "description": "ID of orderid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Order"],
+        "summary": "put Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Order"],
+        "summary": "delete Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/order/user/{userid}": {
+      "parameters": [
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of orderid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/order/{orderid}": {
+      "parameters": [
+        {
+          "name": "orderid",
+          "in": "path",
+          "required": true,
+          "description": "ID of orderid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Order"],
+        "summary": "put Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Order"],
+        "summary": "delete Shop with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/cart": {
+      "post": {
+        "tags": ["Cart"],
+        "summary": "Get all Cart in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/cart/{userid}": {
+      "parameters": [
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of userid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Cart"],
+        "summary": "Get Cart with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/cart/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of itemid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Cart"],
+        "summary": "Get Cart with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Cart"],
+        "summary": "put Cart with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/cart/{itemid}/{userid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of itemid that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of userid that we want to find",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": ["Cart"],
+        "summary": "delete Cart with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/user": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Get all User in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/user/current": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Get all User in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/user/{userid}": {
+      "parameters": [
+        {
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": "ID of userid that we want to find",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "tags": ["User"],
+        "summary": "put User with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "put User with given ID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/comment": {
+      "get": {
+        "tags": ["Comment"],
+        "summary": "Get all Comment in system",
+        "parameters": [
+          {
+            "name": "itemid",
+            "in": "query",
+            "required": true,
+            "description": "ID of the item",
+            "type": "string"
+          },
+          {
+            "name": "shopid",
+            "in": "query",
+            "required": true,
+            "description": "ID of the shop",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comment"],
+        "description": "Create new Comment in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created"
+          }
+        }
+      }
+    },
+
+    "/comment/{cmtid}": {
+      "parameters": [
+        {
+          "name": "cmtid",
+          "in": "path",
+          "required": true,
+          "description": "ID of cmtid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Comment"],
+        "summary": "Get Comment with given ID"
+      },
+      "put": {
+        "tags": ["Comment"],
+        "summary": "Get Comment with given ID"
+      },
+      "delete": {
+        "tags": ["Comment"],
+        "summary": "Get Comment with given ID"
+      }
+    },
+
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get all Auth in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get all Auth in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/auth/forgotPassword": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get all Auth in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/auth/loginGoogle": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get all Auth in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/auth/loginFacebook": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Get all Auth in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/overview": {
+      "get": {
+        "tags": ["Overview"],
+        "summary": "Get all Overview in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Overview"],
+        "summary": "Get all Overview in system",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/overview/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of itemid that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Overview"],
+        "summary": "Get Comment with given ID"
+      },
+      "put": {
+        "tags": ["Overview"],
+        "summary": "Get Comment with given ID"
+      },
+      "delete": {
+        "tags": ["Overview"],
+        "summary": "Get Comment with given ID"
+      }
+    }
+  },
+
+  "definitions": {
+    "User": {
+      "required": ["email", "_id"],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    }
+  }
+}
