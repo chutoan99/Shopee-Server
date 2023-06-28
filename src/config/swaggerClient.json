@@ -112,7 +112,34 @@
         "summary": "Get all industry in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -124,7 +151,34 @@
         "summary": "Get all banner in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -136,7 +190,34 @@
         "summary": "Get all batchList in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -148,7 +229,34 @@
         "summary": "Get all shopMall in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -160,7 +268,34 @@
         "summary": "Get all notification in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -172,7 +307,34 @@
         "summary": "Get all searchSuggestion in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -184,7 +346,34 @@
         "summary": "Get all flashSale in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -196,7 +385,34 @@
         "summary": "Get all TopProduct in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -214,7 +430,39 @@
       ],
       "get": {
         "tags": ["TierVariation"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       }
     },
 
@@ -232,7 +480,34 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "New user is created"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -241,7 +516,34 @@
         "summary": "Get all Like in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -259,7 +561,39 @@
       ],
       "get": {
         "tags": ["Like"],
-        "summary": "Get Like with given ID"
+        "summary": "Get Like with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       }
     },
 
@@ -282,7 +616,39 @@
       ],
       "delete": {
         "tags": ["Like"],
-        "summary": "Get Like with given ID"
+        "summary": "Get Like with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       }
     },
 
@@ -292,7 +658,34 @@
         "summary": "Get all Post in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -301,7 +694,34 @@
         "summary": "Get all Post in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -322,7 +742,34 @@
         "summary": "Get Post with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -331,7 +778,34 @@
         "summary": "put Post with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -340,7 +814,34 @@
         "summary": "delete Post with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -352,7 +853,34 @@
         "summary": "Get all Shop in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -361,7 +889,34 @@
         "summary": "Get all Shop in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -382,7 +937,34 @@
         "summary": "Get Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -391,7 +973,34 @@
         "summary": "put Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -400,7 +1009,34 @@
         "summary": "delete Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -412,7 +1048,34 @@
         "summary": "Get all Order in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -421,7 +1084,34 @@
         "summary": "Get all Order in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -442,7 +1132,34 @@
         "summary": "Get Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -451,7 +1168,34 @@
         "summary": "put Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -460,7 +1204,34 @@
         "summary": "delete Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -481,7 +1252,34 @@
         "summary": "Get Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -502,7 +1300,34 @@
         "summary": "Get Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -511,7 +1336,34 @@
         "summary": "put Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -520,7 +1372,34 @@
         "summary": "delete Shop with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -532,7 +1411,34 @@
         "summary": "Get all Cart in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -553,7 +1459,34 @@
         "summary": "Get Cart with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -574,7 +1507,34 @@
         "summary": "Get Cart with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -583,7 +1543,34 @@
         "summary": "put Cart with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -611,7 +1598,34 @@
         "summary": "delete Cart with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -623,19 +1637,73 @@
         "summary": "Get all User in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
     },
 
     "/user/current": {
-      "post": {
+      "get": {
         "tags": ["User"],
         "summary": "Get all User in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -656,7 +1724,34 @@
         "summary": "put User with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -665,7 +1760,34 @@
         "summary": "put User with given ID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -693,7 +1815,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -710,7 +1859,34 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "New user is created"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -728,15 +1904,111 @@
       ],
       "get": {
         "tags": ["Comment"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       },
       "put": {
         "tags": ["Comment"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       },
       "delete": {
         "tags": ["Comment"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       }
     },
 
@@ -746,7 +2018,34 @@
         "summary": "Get all Auth in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -758,7 +2057,34 @@
         "summary": "Get all Auth in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -770,7 +2096,34 @@
         "summary": "Get all Auth in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -782,7 +2135,34 @@
         "summary": "Get all Auth in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -794,7 +2174,34 @@
         "summary": "Get all Auth in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -806,7 +2213,34 @@
         "summary": "Get all Overview in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       },
@@ -815,7 +2249,34 @@
         "summary": "Get all Overview in system",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
           }
         }
       }
@@ -833,19 +2294,114 @@
       ],
       "get": {
         "tags": ["Overview"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       },
       "put": {
         "tags": ["Overview"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       },
       "delete": {
         "tags": ["Overview"],
-        "summary": "Get Comment with given ID"
+        "summary": "Get Comment with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
       }
     }
   },
-
   "definitions": {
     "Attributes": {
       "properties": {
