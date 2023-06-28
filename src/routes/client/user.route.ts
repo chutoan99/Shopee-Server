@@ -1,22 +1,18 @@
 import express from 'express'
 import { Router } from 'express'
-import AuthClientController from '../../controllers/client/auth.controller'
-import sendEmail from '../../middleWares/sendEmail'
-import passport from 'passport'
-import { badRequest } from '../../middleWares/handle_errors'
+import UserController from '../../controllers/client/user.controller'
+import verifyToken from '~/middleWares/verify_token'
 
 require('dotenv').config()
 
 const router: Router = express.Router()
 
-router.post('/register', AuthClientController.Register, sendEmail)
+router.get('/', UserController.GetAllUser)
 
-router.post('/login', AuthClientController.Login)
+router.get('/current', verifyToken, UserController.GetUserId)
 
-router.post('/forgotPassword', sendEmail, AuthClientController.forgotPassword)
+router.put('/:userid', UserController.UpdateUser)
 
-router.post('/loginGoogle', AuthClientController.loginGoogle)
-
-router.post('/loginFacebook', AuthClientController.loginFacebook)
+router.delete('/:userid', UserController.DeleteUser)
 
 export default router

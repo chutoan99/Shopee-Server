@@ -1,65 +1,61 @@
 const db = require('../../models/index')
 const GetAllLikeService = {
-  GetAllLike: (userid: string): Promise<any> =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.Like.findAll({
-          raw: true,
-          nest: true,
-          where: { userid: userid },
-          include: [{ model: db.Overview, as: 'likeDetail' }],
-          attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to get all like.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+  GetAllLike: async (userid: string) => {
+    try {
+      const response = await db.Like.findAll({
+        raw: true,
+        nest: true,
+        where: { userid: userid },
+        include: [{ model: db.Overview, as: 'likeDetail' }],
+        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get all like.',
+        response
       }
-    }),
+    } catch (error) {
+      throw new Error('Failed to get all like.')
+    }
+  },
 
-  AddLike: (payload: any): Promise<any> =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.Like.findOrCreate({
-          where: {
-            userid: payload.userid,
-            itemid: payload.itemid
-          },
-          defaults: {
-            userid: payload.userid,
-            itemid: payload.itemid,
-            shopid: payload.shopid
-          }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to add like.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+  AddLike: async (payload: any) => {
+    try {
+      const response = await db.Like.findOrCreate({
+        where: {
+          userid: payload.userid,
+          itemid: payload.itemid
+        },
+        defaults: {
+          userid: payload.userid,
+          itemid: payload.itemid,
+          shopid: payload.shopid
+        }
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to add like.',
+        response
       }
-    }),
+    } catch (error) {
+      throw new Error('Failed to add like.')
+    }
+  },
 
-  DeleteLike: (itemid: string, userid: string): Promise<any> =>
-    new Promise((resolve, reject) => {
-      try {
-        console.log(itemid, 'itemid', userid, 'userid')
-        const response = db.Like.destroy({
-          where: { itemid: itemid, userid: userid }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to delete like.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+  DeleteLike: async (itemid: string, userid: string) => {
+    try {
+      const response = await db.Like.destroy({
+        where: { itemid: itemid, userid: userid }
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to delete like.',
+        response
       }
-    })
+    } catch (error) {
+      throw new Error('Failed to delete like.')
+    }
+  }
 }
 
 export { GetAllLikeService }

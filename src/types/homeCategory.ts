@@ -1,4 +1,4 @@
-interface HomeCategories {
+interface HomeCategory {
   id: number
   display_name: string
   catid: number

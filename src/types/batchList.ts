@@ -1,4 +1,4 @@
-interface BatchLists {
+interface BatchList {
   id: number
   banner_image: string
   title: string

@@ -1,4 +1,4 @@
-interface Likes {
+interface Like {
   id: number
   userid: string
   itemid: number

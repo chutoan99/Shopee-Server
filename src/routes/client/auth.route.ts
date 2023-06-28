@@ -12,7 +12,9 @@ router.post('/register', AuthClientController.Register, sendEmail)
 
 router.post('/login', AuthClientController.Login)
 
-router.post('/forgotPassword', sendEmail, AuthClientController.forgotPassword)
+router.post('/forgotPassword', AuthClientController.forgotPassword)
+
+router.post('/sendEmail', sendEmail)
 
 router.post('/loginGoogle', AuthClientController.loginGoogle)
 

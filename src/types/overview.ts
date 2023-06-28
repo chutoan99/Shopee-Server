@@ -1,4 +1,4 @@
-interface Overviews {
+interface Overview {
   id: number
   itemid: number
   shopid: number

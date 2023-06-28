@@ -1,4 +1,4 @@
-interface Categories {
+interface Category {
   id: number
   itemid: number
   display_name: string

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
-import GetAllBanner from '../../services/client/banner.service'
+import BannerService from '../../services/client/banner.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 
 const BannerController = {
-  GetAllBanner: async (req: Request, res: Response): Promise<Response> => {
+  GetAllBanner: async (req: Request, res: Response) => {
     try {
-      const response = await GetAllBanner.GetAllBanner()
+      const response = await BannerService.GetAllBanner()
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)

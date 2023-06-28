@@ -1,4 +1,4 @@
-interface Comments {
+interface Comment {
   id: number
   userid: string
   orderid: number

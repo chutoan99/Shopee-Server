@@ -13,7 +13,7 @@ const UserController = {
   },
 
   GetUserId: async (req: any, res: Response) => {
-    const { userid } = req.user as { userid: string }
+    const { userid } = req.user
     try {
       const response = await UserService.GetUserId(userid)
       return res.status(200).json(response)

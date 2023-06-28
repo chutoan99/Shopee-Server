@@ -1,4 +1,4 @@
-interface Attributes {
+interface Attribute {
   id: number
   itemid: number
   name: string

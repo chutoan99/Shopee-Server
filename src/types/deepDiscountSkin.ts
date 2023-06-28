@@ -1,4 +1,4 @@
-interface DeepDiscountSkins {
+interface DeepDiscountSkin {
   id: number
   itemid: number
   promotion_price: string

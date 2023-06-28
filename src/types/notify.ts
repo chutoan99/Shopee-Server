@@ -1,4 +1,4 @@
-interface Notifications {
+interface Notify {
   id: number
   image: string
   title: string

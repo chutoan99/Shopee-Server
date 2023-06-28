@@ -5,13 +5,15 @@ import { internalServerError, badRequest } from '../../middleWares/handle_errors
 import AuthService from '../../services/client/auth.service'
 
 const AuthClientController = {
-  Register: async (req: Request, res: Response) => {
+  Register: async (req: any, res: Response) => {
     try {
       const { error } = joi.object({ email, password }).validate({
         email: req.body.email,
         password: req.body.password
       })
+
       if (error) return badRequest(error.details[0]?.message, res)
+
       const payload = req.body
       const response = await AuthService.Register(payload)
       return res.status(200).json(response)

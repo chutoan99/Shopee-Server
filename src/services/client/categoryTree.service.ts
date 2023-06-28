@@ -1,42 +1,32 @@
 const db = require('../../models/index')
 
 const CategoriesTreeService = {
-  GetAllCategoriesTree: (level: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.HomeCategory.findAll({
-          where: {
-            level: level
-          }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to get all  Categories tree',
-          total: response.length,
-          response
-        })
-      } catch (error) {
-        reject(error)
+  GetAllCategoriesTree: async (level: any) => {
+    try {
+      const response = await db.HomeCategory.findAll({ where: { level: level } })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get all  Categories tree',
+        total: response.length,
+        response
       }
-    }),
+    } catch (error) {
+      throw new Error('Failed to get all  Categories tree')
+    }
+  },
 
-  GetAllCategoriesParent: (catid: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.HomeCategory.findAll({
-          where: {
-            parent_catid: catid
-          }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to get all  Categories tree',
-          total: response.length,
-          response
-        })
-      } catch (error) {
-        reject(error)
+  GetAllCategoriesParent: async (catid: any) => {
+    try {
+      const response = await db.HomeCategory.findAll({ where: { parent_catid: catid } })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get all  Categories tree',
+        total: response.length,
+        response
       }
-    })
+    } catch (error) {
+      throw new Error('Failed to get all  Categories tree')
+    }
+  }
 }
 export default CategoriesTreeService

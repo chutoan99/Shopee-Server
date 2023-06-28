@@ -3,7 +3,7 @@ import BatchListService from '../../services/client/batchList.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 
 const BatchListController = {
-  GetAllBatchList: async (req: Request, res: Response): Promise<Response> => {
+  GetAllBatchList: async (req: Request, res: Response) => {
     try {
       const response = await BatchListService.GetAllBatchList()
       return res.status(200).json(response)

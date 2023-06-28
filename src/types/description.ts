@@ -1,4 +1,4 @@
-interface Descriptions {
+interface Description {
   id: number
   itemid: number
   description: string

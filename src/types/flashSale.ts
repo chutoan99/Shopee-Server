@@ -1,4 +1,4 @@
-interface FlashSales {
+interface FlashSale {
   id: number
   itemid: number
   shopid: number

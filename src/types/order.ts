@@ -1,4 +1,4 @@
-interface Orders {
+interface Order {
   id: number
   orderid: string
   userid: string

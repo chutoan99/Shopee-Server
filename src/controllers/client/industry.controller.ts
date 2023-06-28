@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { internalServerError } from '../../middleWares/handle_errors'
-import { GetAllIndustryService } from '../../services/client/industry.service'
+import GetAllIndustryService from '../../services/client/industry.service'
 
 const IndustryController = {
   GetAll: async (req: Request, res: Response) => {

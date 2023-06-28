@@ -1,4 +1,4 @@
-interface CommentReplies {
+interface CommentReply {
   id: number
   orderid: number
   itemid: number

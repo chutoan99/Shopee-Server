@@ -3,140 +3,127 @@ import { generateCartid } from '../../utils/gennerateNumber'
 import { Op } from 'sequelize'
 
 const CartService = {
-  GetAllCart: (userid: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.Cart.findAll({
-          where: { userid: userid },
-          raw: true,
-          nest: true,
-          include: [{ model: db.Overview, as: 'detail' }],
-          attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
-        })
-        let shopIdArrays = response.reduce((acc: any, curr: any) => {
-          const shopId = curr.shopid
-          if (acc[shopId]) {
-            acc[shopId].push(curr)
-          } else {
-            acc[shopId] = [curr]
-          }
-          return acc
-        }, {})
-
-        const listNumberCart = []
-        shopIdArrays = Object.values(shopIdArrays)
-        shopIdArrays.map((ele: any) => ele.map((item: any, index: any) => listNumberCart.push(index)))
-        const total_cart = listNumberCart.length
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to get all cart.',
-          total_cart,
-          response: shopIdArrays
-        })
-      } catch (error) {
-        reject(error)
-      }
-    }),
-
-  GetCartId: (itemid: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.Cart.findOne({
-          where: {
-            itemid: itemid
-          }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to get cart id.',
-          response
-        })
-      } catch (error) {
-        reject(error)
-      }
-    }),
-
-  AddCart: (payload: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        let response = {}
-        const condition = {
-          userid: payload.userid,
-          itemid: payload.itemid
-          // option: payload.option,
+  GetAllCart: async (userid: any) => {
+    try {
+      const response = await db.Cart.findAll({
+        where: { userid: userid },
+        raw: true,
+        nest: true,
+        include: [{ model: db.Overview, as: 'detail' }],
+        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+      })
+      let shopIdArrays = response.reduce((acc: any, curr: any) => {
+        const shopId = curr.shopid
+        if (acc[shopId]) {
+          acc[shopId].push(curr)
+        } else {
+          acc[shopId] = [curr]
         }
+        return acc
+      }, {})
 
-        response = db.Cart.findOne({
-          where: condition
-        }).then((response: any) => {
-          console.log(response, 'res')
-          if (response)
-            return db.Cart.update(
-              {
-                userid: payload.userid,
-                itemid: payload.itemid,
-                shopid: payload.shopid,
-                option: payload.option,
-                amount: response.dataValues.amount + 1
-              },
-              {
-                where: condition
-              }
-            )
-          return db.Cart.create({
-            cartid: generateCartid(),
-            userid: payload.userid,
-            itemid: payload.itemid,
-            shopid: payload.shopid,
-            option: payload.option,
-            amount: payload.amount
-          })
-        })
-        console.log(response)
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to add cart.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+      const listNumberCart = []
+      shopIdArrays = Object.values(shopIdArrays)
+      shopIdArrays.map((ele: any) => ele.map((item: any, index: any) => listNumberCart.push(index)))
+      const total_cart = listNumberCart.length
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get all cart.',
+        total_cart,
+        response: shopIdArrays
       }
-    }),
+    } catch (error) {
+      throw new Error('Failed to get all cart.')
+    }
+  },
 
-  UpdateCart: (itemid: any, payload: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const response = db.Cart.update(
-          { amount: payload?.amount, option: payload?.option },
-          { where: { itemid: itemid } }
-        )
-
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to Update cart.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+  GetCartId: async (itemid: any) => {
+    try {
+      const response = await db.Cart.findOne({
+        where: {
+          itemid: itemid
+        }
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get cart id.',
+        response
       }
-    }),
+    } catch (error) {
+      throw new Error('Failed to get cart id.')
+    }
+  },
 
-  DeleteCart: (itemid: any, userid: any, payload: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        console.log(payload)
-        const response = db.Cart.destroy({
-          where: { cartid: { [Op.in]: payload } }
-        })
-        resolve({
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to delete cart.',
-          response
-        })
-      } catch (error) {
-        reject(error)
+  AddCart: async (payload: any) => {
+    try {
+      let response = {}
+      const condition = {
+        userid: payload.userid,
+        itemid: payload.itemid
+        // option: payload.option,
       }
-    })
+      response = db.Cart.findOne({
+        where: condition
+      }).then((response: any) => {
+        if (response)
+          return db.Cart.update(
+            {
+              userid: payload.userid,
+              itemid: payload.itemid,
+              shopid: payload.shopid,
+              option: payload.option,
+              amount: response.dataValues.amount + 1
+            },
+            {
+              where: condition
+            }
+          )
+        return db.Cart.create({
+          cartid: generateCartid(),
+          userid: payload.userid,
+          itemid: payload.itemid,
+          shopid: payload.shopid,
+          option: payload.option,
+          amount: payload.amount
+        })
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to add cart.',
+        response
+      }
+    } catch (error) {
+      throw new Error('Failed to add cart.')
+    }
+  },
+
+  UpdateCart: async (itemid: any, payload: any) => {
+    try {
+      const response = await db.Cart.update({ amount: payload?.amount, option: payload?.option }, { where: { itemid: itemid } })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to Update cart.',
+        response
+      }
+    } catch (error) {
+      throw new Error('Failed to Update cart.')
+    }
+  },
+
+  DeleteCart: async (itemid: any, userid: any, payload: any) => {
+    try {
+      const response = await db.Cart.destroy({
+        where: { cartid: { [Op.in]: payload } }
+      })
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to delete cart.',
+        response
+      }
+    } catch (error) {
+      throw new Error('Failed to delete cart.')
+    }
+  }
 }
 
 export default CartService

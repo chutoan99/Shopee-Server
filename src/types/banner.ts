@@ -1,4 +1,4 @@
-interface Banners {
+interface Banner {
   id: number
   image_url: string
   createdAt: Date

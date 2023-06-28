@@ -1,4 +1,4 @@
-interface Carts {
+interface Cart {
   id: number
   cartid: number
   userid: string

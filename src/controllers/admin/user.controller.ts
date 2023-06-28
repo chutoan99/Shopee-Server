@@ -1,55 +1,53 @@
-import { Request, Response } from "express";
-import { internalServerError } from "../../middleWares/handle_errors";
-import UserProfileService from "../../services/admin/userProfile.service";
+import { Request, Response } from 'express'
+import { internalServerError } from '../../middleWares/handle_errors'
+import UserProfileService from '../../services/admin/userProfile.service'
 
 const UserProfileController = {
   GetProfile: async (req: any, res: Response) => {
     try {
-      const { userid } = req.shop;
+      const { userid } = req.shop
       UserProfileService.GetProfile(userid).then((response: any) => {
-        res.status(200).json(response);
-      });
+        res.status(200).json(response)
+      })
     } catch (error) {
-      return internalServerError(res);
+      return internalServerError(res)
     }
   },
 
   UpdateProfile: async (req: any, res: Response) => {
     try {
-      const payload = req.body;
-      const { userid } = req.shop;
-      UserProfileService.UpdateProfile(userid, payload).then(
-        (response: any) => {
-          res.status(200).json(response);
-        }
-      );
+      const payload = req.body
+      const { userid } = req.shop
+      UserProfileService.UpdateProfile(userid, payload).then((response: any) => {
+        res.status(200).json(response)
+      })
     } catch (error) {
-      internalServerError(res);
+      internalServerError(res)
     }
   },
 
   GetShop: async (req: any, res: Response) => {
     try {
-      const { userid } = req.shop;
+      const { userid } = req.shop
       UserProfileService.GetShop(userid).then((response: any) => {
-        res.status(200).json(response);
-      });
+        res.status(200).json(response)
+      })
     } catch (error) {
-      return internalServerError(res);
+      return internalServerError(res)
     }
   },
 
   UpdateShop: async (req: any, res: Response) => {
     try {
-      const payload = req.body;
-      const { userid } = req.shop;
+      const payload = req.body
+      const { userid } = req.shop
       UserProfileService.UpdateShop(userid, payload).then((response: any) => {
-        res.status(200).json(response);
-      });
+        res.status(200).json(response)
+      })
     } catch (error) {
-      return internalServerError(res);
+      return internalServerError(res)
     }
-  },
-};
+  }
+}
 
-export default UserProfileController;
+export default UserProfileController

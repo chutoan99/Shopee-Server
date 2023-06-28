@@ -1,4 +1,4 @@
-interface Industries {
+interface Industry {
   id: number
   category_name: string
   display_name: string

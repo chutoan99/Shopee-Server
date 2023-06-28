@@ -12,26 +12,11 @@
   "host": "server-shopee.onrender.com",
   "basePath": "/api/admin",
   "tags": [
-    {
-      "name": "Comment",
-      "description": ""
-    },
-    {
-      "name": "Order",
-      "description": ""
-    },
-    {
-      "name": "Product",
-      "description": ""
-    },
-    {
-      "name": "UserInfo",
-      "description": ""
-    },
-    {
-      "name": "Auth",
-      "description": ""
-    }
+    { "name": "Comment", "description": "" },
+    { "name": "Order", "description": "" },
+    { "name": "Product", "description": "" },
+    { "name": "UserInfo", "description": "" },
+    { "name": "Auth", "description": "" }
   ],
 
   "schemes": ["https"],

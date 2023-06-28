@@ -3,50 +3,52 @@ import { internalServerError } from '../../middleWares/handle_errors'
 const db = require('../../models/index')
 
 const OrderService = {
-  GetAllOrder: () => {
-    return new Promise((resolve, reject) => {
-      try {
-        resolve([])
-      } catch (error) {
-        reject(error)
-      }
-    })
+  GetAllOrder: async (req: Request, res: Response) => {
+    try {
+      return []
+    } catch (error) {
+      throw new Error(`Failed to Delete Overview`)
+    }
   },
-  GetOrderId: () => {
-    return new Promise((resolve, reject) => {
+
+  GetOrderId: async (req: Request, res: Response) => {
+    {
       try {
-        resolve(null)
+        return null
       } catch (error) {
-        reject(error)
+        throw new Error(`Failed to Delete Overview`)
       }
-    })
+    }
   },
-  AddOrder: (req: Request, res: Response) => {
-    return new Promise((resolve, reject) => {
+
+  AddOrder: async (req: Request, res: Response) => {
+    {
       try {
-        resolve(null)
+        return null
       } catch (error) {
-        reject(error)
+        throw new Error(`Failed to Delete Overview`)
       }
-    })
+    }
   },
-  UpdateOrder: (req: Request, res: Response) => {
-    return new Promise((resolve, reject) => {
+
+  UpdateOrder: async (req: Request, res: Response) => {
+    {
       try {
-        resolve(null)
+        return null
       } catch (error) {
-        reject(error)
+        throw new Error(`Failed to Delete Overview`)
       }
-    })
+    }
   },
-  DeleteOrder: (req: Request, res: Response) => {
-    return new Promise((resolve, reject) => {
+
+  DeleteOrder: async (req: Request, res: Response) => {
+    {
       try {
-        resolve(true)
+        return true
       } catch (error) {
-        reject(error)
+        throw new Error(`Failed to Delete Overview`)
       }
-    })
+    }
   }
 }
 
