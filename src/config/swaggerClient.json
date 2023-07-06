@@ -2386,6 +2386,22 @@
       "get": {
         "tags": ["TopProduct"],
         "summary": "Get all TopProduct in system",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "description": "",
+            "type": "number"
+          }
+        ],
         "responses": {
           "200": {
             "description": "success",
