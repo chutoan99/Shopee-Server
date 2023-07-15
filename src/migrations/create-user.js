@@ -21,6 +21,10 @@ module.exports = {
       phone: { type: Sequelize.BIGINT },
       avatar: { type: Sequelize.STRING },
       role: { type: Sequelize.STRING },
+      refreshToken: { type: Sequelize.STRING },
+      passwordResetToken: { type: Sequelize.STRING },
+      passwordResetExpires: { type: Sequelize.STRING },
+      passwordChangedAt: { type: Sequelize.STRING },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

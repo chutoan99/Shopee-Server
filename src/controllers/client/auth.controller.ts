@@ -32,6 +32,8 @@ const AuthClientController = {
         })
       }
       const response = await AuthService.Login(email, password)
+      res.cookie('refreshToken', response.newRefreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 })
+      delete response.newRefreshToken
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
@@ -40,16 +42,47 @@ const AuthClientController = {
 
   forgotPassword: async (req: any, res: Response) => {
     try {
-      const code = req.code
-      const { code2 } = req.body
-      if (!email || !password) {
-        return res.status(200).json({
-          err: 1,
-          mess: 'missing input'
-        })
-      }
-      // const response = await AuthService.LoginServices(email, password);
-      // return res.status(200).json(response);
+      const { email } = req.query
+      if (!email) throw new Error('Missing email')
+      const response = await AuthService.ForgotPassword(email)
+      return res.status(200).json(response)
+    } catch (error) {
+      return internalServerError(res)
+    }
+  },
+
+  resetPassword: async (req: any, res: Response) => {
+    try {
+      const { password, token, email } = req.body
+      if (!password || !token || !email) throw new Error('Missing imputs')
+      const response = await AuthService.ResetPassword(password, token, email)
+      return res.status(200).json(response)
+    } catch (error) {
+      return internalServerError(res)
+    }
+  },
+
+  refreshAccessToken: async (req: any, res: Response) => {
+    try {
+      const cookie = req.cookies
+      if (!cookie && !cookie.refreshToken) throw new Error('No refresh token in cookies')
+      const response = await AuthService.RefreshAccessToken(cookie)
+      return res.status(200).json(response)
+    } catch (error) {
+      return internalServerError(res)
+    }
+  },
+
+  logout: async (req: any, res: Response) => {
+    try {
+      const cookie = req.cookies
+      if (!cookie || !cookie.refreshToken) throw new Error('No refresh token in cookies')
+      const response = await AuthService.Logout(cookie)
+      res.clearCookie('refreshToken', {
+        httpOnly: true,
+        secure: true
+      })
+      return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
     }
@@ -57,9 +90,7 @@ const AuthClientController = {
 
   loginGoogle: async (req: Request, res: Response) => {
     try {
-      const { token } = req.body
-      const response = await AuthService.LoginGoogle(token)
-      return res.status(200).json(response)
+      res.redirect('/')
     } catch (error) {
       return internalServerError(res)
     }
@@ -67,9 +98,7 @@ const AuthClientController = {
 
   loginFacebook: async (req: Request, res: Response) => {
     try {
-      const { token } = req.body
-      const response = await AuthService.LoginFacebook(token)
-      return res.status(200).json(response)
+      res.redirect('/')
     } catch (error) {
       return internalServerError(res)
     }

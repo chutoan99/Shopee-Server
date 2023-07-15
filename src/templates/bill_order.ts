@@ -1,4 +1,6 @@
-<div id=":o2" class="ii gt" jslog="20277; u014N:xr6bB; 4:W251bGwsbnVsbCxbXV0.">
+const templateBillOrder = (data: any) => {
+  return `
+  <div id=":o2" class="ii gt" jslog="20277; u014N:xr6bB; 4:W251bGwsbnVsbCxbXV0.">
   <div id=":o1" class="a3s aiL">
     <div dir="ltr">
       <div class="gmail_default adM" style="font-family: comic sans ms, sans-serif">
@@ -1931,3 +1933,6 @@
     <div class="adL"></div>
   </div>
 </div>
+  `
+}
+export default templateBillOrder

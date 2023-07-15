@@ -29,6 +29,10 @@ import UserProfileRoute from './admin/userProfile.route'
 import swaggerUi from 'swagger-ui-express'
 import swaggerClientDocument from '../config/swaggerClient.json'
 import swaggerAdminDocument from '../config/swaggerAdmin.json'
+//? INSERT
+import InsertRoute from './insert/index'
+//? CRAWL
+import CrawlRoute from './crawl/index'
 
 const serveSwaggerClient = swaggerUi.serveFiles(swaggerClientDocument)
 const serveSwaggerAdmin = swaggerUi.serveFiles(swaggerAdminDocument)
@@ -54,16 +58,19 @@ const initRoutes = (app: Express) => {
   app.use('/api/client/tierVariation', TierVariationRoute)
   app.use('/api/client/topProduct', TopProductRoute)
   app.use('/api/client/user', UserRoute)
-  // Middleware for /api-docs-client
-  app.use('/api/client/docs', serveSwaggerClient, swaggerUi.setup(swaggerClientDocument))
-
   //? ADMIN
   app.use('/api/admin/product', ProductRoute)
   app.use('/api/admin/comment', CommentRoute)
   app.use('/api/admin/order', OrderRoute)
   app.use('/api/admin/auth', AuthRoute)
   app.use('/api/admin/userInfo', UserProfileRoute)
-  // Middleware for /api-docs-admin
+  //? INSERT
+  app.use('/api/insert', InsertRoute)
+  //? CRAWL
+  app.use('/api/crawl', CrawlRoute)
+  // Middleware for /api-docs-admin , /api-docs-client
+
+  app.use('/api/client/docs', serveSwaggerClient, swaggerUi.setup(swaggerClientDocument))
   app.use('/api/admin/docs', serveSwaggerAdmin, swaggerUi.setup(swaggerAdminDocument))
 
   // * If the route does not match any of the above, fall back to this route

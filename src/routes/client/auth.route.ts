@@ -12,12 +12,20 @@ router.post('/register', AuthClientController.Register, sendEmail)
 
 router.post('/login', AuthClientController.Login)
 
-router.post('/forgotPassword', AuthClientController.forgotPassword)
+router.get('/forgotPassword', AuthClientController.forgotPassword)
 
-router.post('/sendEmail', sendEmail)
+router.put('/resetPassword', AuthClientController.resetPassword)
 
-router.post('/loginGoogle', AuthClientController.loginGoogle)
+router.post('/refreshToken', AuthClientController.refreshAccessToken)
 
-router.post('/loginFacebook', AuthClientController.loginFacebook)
+router.get('/logout', AuthClientController.logout)
+
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), AuthClientController.loginGoogle)
+
+router.get('/facebook', passport.authenticate('facebook'))
+
+router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), AuthClientController.loginFacebook)
 
 export default router

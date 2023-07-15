@@ -5,12 +5,25 @@ import connectDb from './config/connectDb'
 import configSocketIO from './config/socketio'
 import initRoutes from './routes/index'
 import { Server } from 'socket.io'
+import cookieParser from 'cookie-parser'
+import { json } from 'body-parser'
+import bodyParser from 'body-parser'
 // Create an Express app
 const app = express()
 app.use(cors())
 app.use(express())
+app.use(cookieParser())
 app.options('*', cors())
 app.use(express.json())
+app.use(express.static('public'))
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(
+  bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
+  })
+)
 
 // app
 connectDb()

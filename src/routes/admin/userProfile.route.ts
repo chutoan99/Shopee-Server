@@ -1,8 +1,7 @@
 import express from 'express'
 
 import UserProfileController from '../../controllers/admin/user.controller'
-import isShopAdmin from '../../middleWares/verify_role'
-import verifyToken from '../../middleWares/verify_token'
+import { verifyToken, isShopAdmin } from '../../middleWares/jwt'
 
 const router = express.Router()
 

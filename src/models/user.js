@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+const { password } = require('~/helpers/validate')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -31,7 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       birthday: DataTypes.STRING,
       phone: DataTypes.BIGINT,
-      avatar: DataTypes.STRING
+      avatar: DataTypes.STRING,
+      refreshToken: DataTypes.STRING,
+      passwordResetToken: DataTypes.STRING,
+      passwordResetExpires: DataTypes.STRING,
+      passwordChangedAt: DataTypes.STRING
     },
     {
       sequelize,

@@ -1,7 +1,7 @@
 import express from 'express'
 import { Router } from 'express'
 import UserController from '../../controllers/client/user.controller'
-import verifyToken from '~/middleWares/verify_token'
+import { verifyToken } from '~/middleWares/jwt'
 
 require('dotenv').config()
 
