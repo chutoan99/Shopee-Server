@@ -65,7 +65,7 @@ const initRoutes = (app: Express) => {
   app.use('/api/admin/auth', AuthRoute)
   app.use('/api/admin/userInfo', UserProfileRoute)
   //? INSERT
-  app.use('/api/insert', InsertRoute)
+  // app.use('/api/insert', InsertRoute)
   //? CRAWL
   app.use('/api/crawl', CrawlRoute)
   // Middleware for /api-docs-admin , /api-docs-client
