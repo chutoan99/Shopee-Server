@@ -60,8 +60,8 @@ const CartService = {
       let response = {}
       const condition = {
         userid: userid,
-        itemid: payload.itemid,
-        option: payload.option
+        itemid: payload.itemid
+        // option: payload.option
       }
       response = await db.Cart.findOne({
         where: condition
@@ -69,7 +69,7 @@ const CartService = {
         if (response)
           return db.Cart.update(
             {
-              userid: payload.userid,
+              userid: userid,
               itemid: payload.itemid,
               shopid: payload.shopid,
               option: payload.option,
@@ -81,7 +81,7 @@ const CartService = {
           )
         return db.Cart.create({
           cartid: generateCartid(),
-          userid: payload.userid,
+          userid: userid,
           itemid: payload.itemid,
           shopid: payload.shopid,
           option: payload.option,
