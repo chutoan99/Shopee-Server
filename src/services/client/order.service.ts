@@ -3,28 +3,28 @@ import { Op } from 'sequelize'
 import { generateOrderid } from '../../utils/gennerateNumber'
 
 const OrderService = {
-  GetAllOrder: async (query: any) => {
-    try {
-      const queries = { ...query }
-      const response = db.Order.findAll({
-        where: queries,
-        raw: true,
-        nest: true,
-        include: [
-          { model: db.Overview, as: 'orderDetail' },
-          { model: db.User, as: 'user' }
-        ],
-        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
-      })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get all Order.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to get all Order.')
-    }
-  },
+  // GetAllOrder: async (query: any, userid: any) => {
+  //   try {
+  //     const queries = { ...query }
+  //     const response = db.Order.findAll({
+  //       where: queries,
+  //       raw: true,
+  //       nest: true,
+  //       include: [
+  //         { model: db.Overview, as: 'orderDetail' },
+  //         { model: db.User, as: 'user' }
+  //       ],
+  //       attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+  //     })
+  //     return {
+  //       err: response ? 0 : 1,
+  //       msg: response ? 'OK' : 'Failed to get all Order.',
+  //       response
+  //     }
+  //   } catch (error) {
+  //     throw new Error('Failed to get all Order.')
+  //   }
+  // },
 
   GetAllOrderOfUser: async (userid: any) => {
     try {
@@ -34,7 +34,10 @@ const OrderService = {
         },
         raw: true,
         nest: true,
-        include: [{ model: db.Overview, as: 'orderDetail' }],
+        include: [
+          { model: db.Overview, as: 'orderDetail' },
+          { model: db.TierVariation, as: 'tier_variations_order' }
+        ],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
       })
       let shopIdArrays = response.reduce((acc: any, curr: any) => {
@@ -61,30 +64,31 @@ const OrderService = {
     }
   },
 
-  GetOrderId: async (orderid: any) => {
-    try {
-      const response = await db.Order.findOne({
-        where: {
-          orderid: orderid
-        }
-      })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get Order id.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to get Order id.')
-    }
-  },
+  // GetOrderId: async (orderid: any) => {
+  //   try {
+  //     const response = await db.Order.findOne({
+  //       where: {
+  //         orderid: orderid
+  //       }
+  //     })
+  //     return {
+  //       err: response ? 0 : 1,
+  //       msg: response ? 'OK' : 'Failed to get Order id.',
+  //       response
+  //     }
+  //   } catch (error) {
+  //     throw new Error('Failed to get Order id.')
+  //   }
+  // },
 
-  AddOrder: async (payload: any) => {
+  AddOrder: async (payload: any, userid: any) => {
     try {
       const length = payload.length
+      const listResponse = []
       for (let index = 0; index < length; index++) {
         const response = await db.Order.create({
           orderid: +generateOrderid(),
-          userid: payload[index].userid,
+          userid: userid,
           itemid: payload[index].itemid,
           shopid: payload[index].shopid,
           amount: payload[index].amount,
@@ -93,18 +97,19 @@ const OrderService = {
           note: payload[index].note,
           shiped: false
         })
-        return {
-          err: response ? 0 : 1,
-          msg: response ? 'OK' : 'Failed to add order.'
-          // response: result,
-        }
+        listResponse.push(response)
+      }
+      return {
+        err: listResponse ? 0 : 1,
+        msg: listResponse ? 'OK' : 'Failed to add order.',
+        response: listResponse ? listResponse : null
       }
     } catch (error) {
       throw new Error('Failed to add order.')
     }
   },
 
-  UpdateOrder: async (orderid: any, payload: any) => {
+  UpdateOrder: async (orderid: any, payload: any, userid: any) => {
     try {
       const response = await db.Order.update(
         {
@@ -112,7 +117,7 @@ const OrderService = {
           option: payload?.option,
           state: payload?.state
         },
-        { where: { orderid: orderid } }
+        { where: { orderid: orderid, userid: userid } }
       )
       return {
         err: response ? 0 : 1,
@@ -124,15 +129,14 @@ const OrderService = {
     }
   },
 
-  DeleteOrder: async (orderid: any) => {
+  DeleteOrder: async (orderid: any, userid: any) => {
     try {
       const response = db.Order.destroy({
-        where: { orderid: orderid }
+        where: { orderid: orderid, userid: userid }
       })
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to delete order.',
-        response
+        msg: response ? 'OK' : 'Failed to delete order.'
       }
     } catch (error) {
       throw new Error('Failed to delete order.')

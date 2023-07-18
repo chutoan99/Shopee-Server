@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'userid',
         as: 'user'
       })
+      Order.belongsTo(models.TierVariation, {
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'tier_variations_order'
+      })
     }
   }
   Order.init(

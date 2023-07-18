@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'itemid',
         as: 'tier_variations'
       })
+      TierVariation.hasOne(models.Order, {
+        foreignKey: 'itemid',
+        as: 'tier_variations_order'
+      })
     }
   }
   TierVariation.init(
