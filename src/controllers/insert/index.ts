@@ -21,7 +21,7 @@ const InsertControllers = {
     try {
       for (let index = 1; index < 15; index++) {
         const global_cats = require(`../../../../data/cate/cate_${index}.json`).data.global_cats
-        await Promise.all(global_cats.map((item: any, i: any) => insertIndustry(item)))
+        global_cats.map((item: any, i: any) => insertIndustry(item))
       }
       res.status(200).send('Industries processed successfully.')
     } catch (error) {
@@ -67,12 +67,20 @@ const InsertControllers = {
       const { start, end } = req.params
       for (let index = start; index < end; index++) {
         const ratings = require(`../../../../data/ratings/rating_${index}.json`).data?.ratings
-        ratings.forEach(async (item: any, i: any) => {
-          for (const item of ratings) {
+        for (const [i, item] of ratings.entries()) {
+          try {
             await insertComment(item)
             await insertItemRatingReply(item)
+            console.log(item?.itemid, index, i)
+          } catch (error) {
+            console.error(error)
           }
-        })
+        }
+        // .forEach(async (item: any, i: any) => {
+        //   for (const item of ratings) {
+
+        //   }
+        // })
       }
       res.status(200).send('comment processed successfully.')
     } catch (error) {

@@ -30,39 +30,40 @@ const CartService = {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get all cart.',
         total_cart,
-        response: shopIdArrays
+        response: response ? response : null
       }
     } catch (error) {
       throw new Error('Failed to get all cart.')
     }
   },
 
-  GetCartId: async (itemid: any) => {
+  GetCartId: async (cartid: any, userid: any) => {
     try {
       const response = await db.Cart.findOne({
         where: {
-          itemid: itemid
+          cartid: cartid,
+          userid: userid
         }
       })
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get cart id.',
-        response
+        response: response
       }
     } catch (error) {
       throw new Error('Failed to get cart id.')
     }
   },
 
-  AddCart: async (payload: any) => {
+  AddCart: async (payload: any, userid: any) => {
     try {
       let response = {}
       const condition = {
-        userid: payload.userid,
-        itemid: payload.itemid
-        // option: payload.option,
+        userid: userid,
+        itemid: payload.itemid,
+        option: payload.option
       }
-      response = db.Cart.findOne({
+      response = await db.Cart.findOne({
         where: condition
       }).then((response: any) => {
         if (response)
@@ -87,19 +88,20 @@ const CartService = {
           amount: payload.amount
         })
       })
+      console.log(response, 'response')
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to add cart.',
-        response
+        response: response ? response : null
       }
     } catch (error) {
       throw new Error('Failed to add cart.')
     }
   },
 
-  UpdateCart: async (itemid: any, payload: any) => {
+  UpdateCart: async (cartid: any, payload: any) => {
     try {
-      const response = await db.Cart.update({ amount: payload?.amount, option: payload?.option }, { where: { itemid: itemid } })
+      const response = await db.Cart.update({ amount: payload?.amount, option: payload?.option }, { where: { cartid: cartid } })
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to Update cart.',
@@ -110,11 +112,9 @@ const CartService = {
     }
   },
 
-  DeleteCart: async (itemid: any, userid: any, payload: any) => {
+  DeleteCart: async (cartid: any) => {
     try {
-      const response = await db.Cart.destroy({
-        where: { cartid: { [Op.in]: payload } }
-      })
+      const response = await db.Cart.destroy({ where: { cartid: cartid } })
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to delete cart.',

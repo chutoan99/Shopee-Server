@@ -3,10 +3,9 @@ import CartService from '../../services/client/cart.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 
 const CartController = {
-  GetAllCart: async (req: Request, res: Response) => {
-    const { userid } = req.params
-
+  GetAllCart: async (req: any, res: Response) => {
     try {
+      const { userid } = req.user
       const response = await CartService.GetAllCart(userid)
       return res.status(200).json(response)
     } catch (error) {
@@ -14,20 +13,22 @@ const CartController = {
     }
   },
 
-  GetCartId: async (req: Request, res: Response) => {
-    const { itemid } = req.params
+  GetCartId: async (req: any, res: Response) => {
     try {
-      const response = await CartService.GetCartId(itemid)
+      const { cartid } = req.params
+      const { userid } = req.user
+      const response = await CartService.GetCartId(cartid, userid)
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
     }
   },
 
-  AddCart: async (req: Request, res: Response) => {
+  AddCart: async (req: any, res: Response) => {
     const payload = req.body
+    const { userid } = req.user
     try {
-      const response = await CartService.AddCart(payload)
+      const response = await CartService.AddCart(payload, userid)
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
@@ -36,9 +37,9 @@ const CartController = {
 
   UpdateCart: async (req: Request, res: Response) => {
     const payload = req.body
-    const { itemid } = req.params
+    const { cartid } = req.params
     try {
-      const response = await CartService.UpdateCart(itemid, payload)
+      const response = await CartService.UpdateCart(cartid, payload)
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
@@ -46,10 +47,9 @@ const CartController = {
   },
 
   DeleteCart: async (req: Request, res: Response) => {
-    const { itemid, userid } = req.params
-    const { payload } = req.body
+    const { cartid } = req.params
     try {
-      const response = await CartService.DeleteCart(itemid, userid, payload)
+      const response = await CartService.DeleteCart(cartid)
       return res.status(200).json(response)
     } catch (error) {
       return internalServerError(res)
