@@ -88,7 +88,6 @@ const CartService = {
           amount: payload.amount
         })
       })
-      console.log(response, 'response')
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to add cart.',
