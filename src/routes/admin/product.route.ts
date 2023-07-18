@@ -1,5 +1,5 @@
 import express from 'express'
-import fileUploader from '../../middleWares/cloudinary'
+import fileUploader from '../../config/cloudinary'
 import ProductController from '../../controllers/admin/product.controller'
 import { verifyToken, isShopAdmin } from '../../middleWares/jwt'
 

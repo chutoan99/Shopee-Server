@@ -449,45 +449,32 @@
         "description": "Updates a user with the given ID.",
         "security": [{ "Bearer": [] }],
         "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "avatar",
+            "description": "Avatar file",
+            "required": true,
+            "type": "file"
           },
-          "400": {
-            "description": "Bad Request",
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that contains the login credentials",
+            "required": false,
             "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
+              "required": ["name"],
+              "properties": {
+                "sex": { "type": "string" },
+                "email": { "type": "string" },
+                "address": { "type": "string" },
+                "name": { "type": "string" },
+                "birthday": { "type": "string", "format": "date" },
+                "phone": { "type": "string" }
+              }
             }
           }
-        }
-      },
-      "delete": {
-        "tags": ["User"],
-        "summary": "Delete a User by ID",
-        "description": "Deletes a user with the given ID.",
-        "security": [{ "Bearer": [] }],
-        "produces": ["application/json"],
+        ],
         "responses": {
           "200": {
             "description": "Success",

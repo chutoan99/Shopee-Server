@@ -25,7 +25,7 @@ const AuthService = {
           shopid: generateShopid(),
           password: hashPassWord(payload?.password),
           avatar: payload?.avatar || avatar(payload.sex),
-          sex: payload.sex || 0,
+          sex: +payload.sex || 0,
           role: 'client',
           name: payload?.name,
           address: payload?.address,

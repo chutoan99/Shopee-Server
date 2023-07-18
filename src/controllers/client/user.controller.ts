@@ -1,20 +1,14 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import UserService from '../../services/client/user.service'
-import { internalServerError } from '../../middleWares/handle_errors'
+import { badRequest, internalServerError } from '../../middleWares/handle_errors'
+import Joi from 'joi'
+const cloudinary = require('cloudinary').v2
+import { image } from '../../helpers/validate'
 
 const UserController = {
-  // GetAllUser: async (req: Request, res: Response) => {
-  //   try {
-  //     const response = await UserService.GetAllUser()
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // },
-
   GetUserId: async (req: any, res: Response) => {
-    const { userid } = req.user
     try {
+      const { userid } = req.user
       const response = await UserService.GetUserId(userid)
       return res.status(200).json(response)
     } catch (error) {
@@ -23,21 +17,20 @@ const UserController = {
   },
 
   UpdateUser: async (req: any, res: Response) => {
-    const payload = req.body
-    const { userid } = req.user
     try {
-      const response = await UserService.UpdateUser(userid, payload)
-      return res.status(200).json(response)
-    } catch (error) {
-      internalServerError(res)
-    }
-  },
-
-  DeleteUser: async (req: any, res: Response) => {
-    const { userid } = req.user
-    try {
-      const response = await UserService.DeleteUser(userid)
-      return res.status(200).json(response)
+      const fileData = req.file
+      const payload = req.body
+      const { userid } = req.user
+      const { error } = Joi.object({ image }).validate({
+        image: fileData.path
+      })
+      if (error) {
+        if (fileData) cloudinary.uploader.destroy(fileData.filename)
+        return badRequest(error.details[0].message, res)
+      }
+      UserService.UpdateUser(userid, payload, fileData).then((response: any) => {
+        res.status(200).json(response)
+      })
     } catch (error) {
       internalServerError(res)
     }
