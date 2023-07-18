@@ -7,12 +7,12 @@ require('dotenv').config()
 
 const router: Router = express.Router()
 
-router.get('/', UserController.GetAllUser)
+// router.get('/', UserController.GetAllUser)
 
 router.get('/current', verifyToken, UserController.GetUserId)
 
-router.put('/:userid', UserController.UpdateUser)
+router.put('/', verifyToken, UserController.UpdateUser)
 
-router.delete('/:userid', UserController.DeleteUser)
+router.delete('/', verifyToken, UserController.DeleteUser)
 
 export default router

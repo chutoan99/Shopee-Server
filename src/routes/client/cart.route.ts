@@ -8,8 +8,6 @@ router.get('/', verifyToken, CartController.GetAllCart)
 
 router.post('/', verifyToken, CartController.AddCart)
 
-// router.get('/:cartid', verifyToken, CartController.GetCartId)
-
 router.put('/:cartid', verifyToken, CartController.UpdateCart)
 
 router.delete('/:cartid', verifyToken, CartController.DeleteCart)

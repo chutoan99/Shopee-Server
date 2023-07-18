@@ -13,17 +13,6 @@ const CartController = {
     }
   },
 
-  GetCartId: async (req: any, res: Response) => {
-    try {
-      const { cartid } = req.params
-      const { userid } = req.user
-      const response = await CartService.GetCartId(cartid, userid)
-      return res.status(200).json(response)
-    } catch (error) {
-      return internalServerError(res)
-    }
-  },
-
   AddCart: async (req: any, res: Response) => {
     const payload = req.body
     const { userid } = req.user

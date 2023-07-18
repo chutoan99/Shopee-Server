@@ -17,7 +17,6 @@ import AuthClientRoute from './client/auth.route'
 import CategoryTreeRoute from './client/categoryTree.route'
 import OverviewRoute from './client/overview.route'
 import OrderClientRoute from './client/order.route'
-import TierVariationRoute from './client/tierVariation.route'
 import TopProductRoute from './client/topProduct.route'
 //? ADMIN
 import ProductRoute from './admin/product.route'
@@ -54,7 +53,6 @@ const initRoutes = (app: Express) => {
   app.use('/api/client/searchSuggestion', searchSuggestionRoute)
   app.use('/api/client/shop', ShopRoute)
   app.use('/api/client/shopMall', shopMallRoute)
-  app.use('/api/client/tierVariation', TierVariationRoute)
   app.use('/api/client/topProduct', TopProductRoute)
   app.use('/api/client/user', UserRoute)
   //? ADMIN

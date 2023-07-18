@@ -9,29 +9,30 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
+
   "host": "localhost:8000",
   "basePath": "/api/client",
   "tags": [
-    { "name": "Auth", "description": "" },
-    { "name": "Banner", "description": "" },
-    { "name": "BatchList", "description": "" },
-    { "name": "Cart", "description": "" },
-    { "name": "CategoryTree", "description": "" },
-    { "name": "Comment", "description": "" },
-    { "name": "FlashSale", "description": "" },
-    { "name": "Industry", "description": "" },
-    { "name": "Like", "description": "" },
-    { "name": "Notification", "description": "" },
-    { "name": "Order", "description": "" },
-    { "name": "Overview", "description": "" },
-    { "name": "Post", "description": "" },
-    { "name": "SearchSuggestion", "description": "" },
-    { "name": "Shop", "description": "" },
-    { "name": "ShopMall", "description": "" },
-    { "name": "TierVariation", "description": "" },
-    { "name": "TopProduct", "description": "" },
-    { "name": "User", "description": "" }
+    { "name": "Auth", "description": "User authentication and authorization functionality." },
+    { "name": "User", "description": "User information and management." },
+    { "name": "Cart", "description": "Shopping cart functionality for e-commerce applications." },
+    { "name": "Order", "description": "Order management and purchasing process." },
+    { "name": "Like", "description": "Functionality for liking" },
+    { "name": "Banner", "description": "Management of banners and advertisement images." },
+    { "name": "BatchList", "description": "List of items in batches." },
+    { "name": "CategoryTree", "description": "Hierarchical representation of categories." },
+    { "name": "Comment", "description": "User comments and opinions management." },
+    { "name": "FlashSale", "description": "Sales activities with discounted prices for a limited time." },
+    { "name": "Industry", "description": "Industry information." },
+    { "name": "Notification", "description": "User notifications within the application." },
+    { "name": "Overview", "description": "General overview" },
+    { "name": "Post", "description": "Management of posts or content." },
+    { "name": "SearchSuggestion", "description": "Search suggestions for users" },
+    { "name": "Shop", "description": "Shop or business information and management" },
+    { "name": "ShopMall", "description": "Management of shopping malls or commercial centers" },
+    { "name": "TopProduct", "description": "Top or popular product management" }
   ],
+
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
@@ -42,16 +43,18 @@
       "in": "header"
     }
   },
+
   "paths": {
     "/auth/register": {
       "post": {
         "tags": ["Auth"],
-        "summary": "Get all Auth in system",
+        "summary": "Register a new user",
+        "description": "Registers a new user in the system.",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "User object that contains the registration details",
             "required": false,
             "schema": {
               "required": ["name", "photoUrls"],
@@ -70,7 +73,7 @@
         ],
         "responses": {
           "200": {
-            "description": "success",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/User_Response"
             }
@@ -88,7 +91,7 @@
             }
           },
           "404": {
-            "description": "not found",
+            "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/Response_404"
             }
@@ -106,12 +109,13 @@
     "/auth/login": {
       "post": {
         "tags": ["Auth"],
-        "summary": "Get all Auth in system",
+        "summary": "User login",
+        "description": "Logs in a user with the provided credentials.",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "User object that contains the login credentials",
             "required": false,
             "schema": {
               "required": ["name", "photoUrls"],
@@ -122,6 +126,287 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/forgotPassword": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Forgot password",
+        "description": "Initiates the password recovery process for a user.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/resetPassword": {
+      "put": {
+        "tags": ["Auth"],
+        "summary": "Reset password",
+        "description": "Resets the password for a user.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/refreshToken": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Refresh access token",
+        "description": "Generates a new access token using a refresh token.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/logout": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "description": "Logs out the currently authenticated user.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/google": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Google login",
+        "description": "Logs in a user using their Google account.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/auth/facebook": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Facebook login",
+        "description": "Logs in a user using their Facebook account.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/user/current": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all User in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -157,27 +442,285 @@
       }
     },
 
-    "/auth/sendEmail": {
+    "/user": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update a User by ID",
+        "description": "Updates a user with the given ID.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete a User by ID",
+        "description": "Deletes a user with the given ID.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/cart": {
+      "get": {
+        "tags": ["Cart"],
+        "summary": "Get all Carts in the system",
+        "description": "Retrieves all carts in the system.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      },
       "post": {
-        "tags": ["Auth"],
-        "summary": "Get all Auth in system",
+        "tags": ["Cart"],
+        "summary": "Create a new Cart",
+        "description": "Creates a new cart.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/cart/{cartid}": {
+      "parameters": [
+        {
+          "name": "cartid",
+          "in": "path",
+          "required": true,
+          "description": "ID of the cart to retrieve",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": ["Cart"],
+        "summary": "Delete a Cart by ID",
+        "description": "Deletes a cart with the given ID.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Cart"],
+        "summary": "Update a Cart by ID",
+        "description": "Updates a cart with the given ID.",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/like": {
+      "post": {
+        "tags": ["Like"],
+        "description": "Create new user in system",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "User object that contains the login credentials",
             "required": false,
             "schema": {
               "required": ["name", "photoUrls"],
               "properties": {
-                "email": { "type": "string" }
+                "itemid": { "type": "number" },
+                "shopid": { "type": "number" }
               }
             }
           }
         ],
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "success"
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -204,13 +747,12 @@
             }
           }
         }
-      }
-    },
-
-    "/auth/forgotPassword": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Get all Auth in system",
+      },
+      "get": {
+        "tags": ["Like"],
+        "summary": "Get all Like in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -246,49 +788,21 @@
       }
     },
 
-    "/auth/loginGoogle": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Get all Auth in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
+    "/like/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Like that we want to find",
+          "type": "string"
         }
-      }
-    },
-
-    "/auth/loginFacebook": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Get all Auth in system",
+      ],
+      "delete": {
+        "tags": ["Like"],
+        "summary": "Get Like with given ID",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -372,232 +886,6 @@
             "description": "success",
             "schema": {
               "$ref": "#/definitions/BatchList_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/cart": {
-      "post": {
-        "tags": ["Cart"],
-        "summary": "Get all Cart in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/cart/{userid}": {
-      "parameters": [
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of userid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Cart"],
-        "summary": "Get Cart with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/cart/{itemid}": {
-      "parameters": [
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of itemid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Cart"],
-        "summary": "Get Cart with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Cart"],
-        "summary": "put Cart with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/cart/{itemid}/{userid}": {
-      "parameters": [
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of itemid that we want to find",
-          "type": "string"
-        },
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of userid that we want to find",
-          "type": "string"
-        }
-      ],
-      "delete": {
-        "tags": ["Cart"],
-        "summary": "delete Cart with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
             }
           },
           "400": {
@@ -1083,192 +1371,6 @@
       }
     },
 
-    "/like": {
-      "post": {
-        "tags": ["Like"],
-        "description": "Create new user in system",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User that we want to create"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": ["Like"],
-        "summary": "Get all Like in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/like/{userid}": {
-      "parameters": [
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of Like that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Like"],
-        "summary": "Get Like with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/like/{itemid}/{userid}": {
-      "parameters": [
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of Like that we want to find",
-          "type": "string"
-        },
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of Like that we want to find",
-          "type": "string"
-        }
-      ],
-      "delete": {
-        "tags": ["Like"],
-        "summary": "Get Like with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
     "/notification": {
       "get": {
         "tags": ["Notification"],
@@ -1312,6 +1414,8 @@
       "get": {
         "tags": ["Order"],
         "summary": "Get all Order in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -1348,6 +1452,8 @@
       "post": {
         "tags": ["Order"],
         "summary": "Get all Order in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -1393,45 +1499,11 @@
           "type": "string"
         }
       ],
-      "get": {
-        "tags": ["Order"],
-        "summary": "Get Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
       "put": {
         "tags": ["Order"],
         "summary": "put Shop with given ID",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -1468,174 +1540,8 @@
       "delete": {
         "tags": ["Order"],
         "summary": "delete Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/order/user/{userid}": {
-      "parameters": [
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of orderid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Order"],
-        "summary": "Get Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/order/{orderid}": {
-      "parameters": [
-        {
-          "name": "orderid",
-          "in": "path",
-          "required": true,
-          "description": "ID of orderid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Order"],
-        "summary": "Get Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Order"],
-        "summary": "put Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Order"],
-        "summary": "delete Shop with given ID",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "success",
@@ -2334,54 +2240,6 @@
       }
     },
 
-    "/TierVariation/{itemid}": {
-      "parameters": [
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of itemid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["TierVariation"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/TierVariation_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
     "/topProduct": {
       "get": {
         "tags": ["TopProduct"],
@@ -2407,170 +2265,6 @@
             "description": "success",
             "schema": {
               "$ref": "#/definitions/TopProduct_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/user": {
-      "post": {
-        "tags": ["User"],
-        "summary": "Get all User in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/user/current": {
-      "get": {
-        "tags": ["User"],
-        "summary": "Get all User in system",
-        "security": [{ "Bearer": [] }],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/user/{userid}": {
-      "parameters": [
-        {
-          "name": "userid",
-          "in": "path",
-          "required": true,
-          "description": "ID of userid that we want to find",
-          "type": "string"
-        }
-      ],
-      "put": {
-        "tags": ["User"],
-        "summary": "put User with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["User"],
-        "summary": "put User with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
             }
           },
           "400": {

@@ -19,15 +19,15 @@ const GetAllLikeService = {
     }
   },
 
-  AddLike: async (payload: any) => {
+  AddLike: async (payload: any, userid: string) => {
     try {
       const response = await db.Like.findOrCreate({
         where: {
-          userid: payload.userid,
+          userid: userid,
           itemid: payload.itemid
         },
         defaults: {
-          userid: payload.userid,
+          userid: userid,
           itemid: payload.itemid,
           shopid: payload.shopid
         }
@@ -49,8 +49,7 @@ const GetAllLikeService = {
       })
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to delete like.',
-        response
+        msg: response ? 'OK' : 'Failed to delete like.'
       }
     } catch (error) {
       throw new Error('Failed to delete like.')

@@ -3,17 +3,6 @@ import OrderService from '../../services/client/order.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 
 const OrderClientController = {
-  // GetAllOrder: async (req: any, res: Response) => {
-  //   try {
-  //     const { userid } = req.user
-  //     const query = req.query
-  //     const response = await OrderService.GetAllOrder(userid, query)
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // },
-
   GetAllOrder: async (req: any, res: Response) => {
     try {
       const { userid } = req.user
@@ -23,16 +12,6 @@ const OrderClientController = {
       internalServerError(res)
     }
   },
-
-  // GetOrderId: async (req: Request, res: Response) => {
-  //   const { orderid } = req.params
-  //   try {
-  //     const response = await OrderService.GetOrderId(orderid)
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // },
 
   AddOrder: async (req: any, res: Response) => {
     const payload = req.body

@@ -3,14 +3,14 @@ import UserService from '../../services/client/user.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 
 const UserController = {
-  GetAllUser: async (req: Request, res: Response) => {
-    try {
-      const response = await UserService.GetAllUser()
-      return res.status(200).json(response)
-    } catch (error) {
-      internalServerError(res)
-    }
-  },
+  // GetAllUser: async (req: Request, res: Response) => {
+  //   try {
+  //     const response = await UserService.GetAllUser()
+  //     return res.status(200).json(response)
+  //   } catch (error) {
+  //     internalServerError(res)
+  //   }
+  // },
 
   GetUserId: async (req: any, res: Response) => {
     const { userid } = req.user
@@ -22,9 +22,9 @@ const UserController = {
     }
   },
 
-  UpdateUser: async (req: Request, res: Response) => {
+  UpdateUser: async (req: any, res: Response) => {
     const payload = req.body
-    const { userid } = req.params
+    const { userid } = req.user
     try {
       const response = await UserService.UpdateUser(userid, payload)
       return res.status(200).json(response)
@@ -33,8 +33,8 @@ const UserController = {
     }
   },
 
-  DeleteUser: async (req: Request, res: Response) => {
-    const { userid } = req.params
+  DeleteUser: async (req: any, res: Response) => {
+    const { userid } = req.user
     try {
       const response = await UserService.DeleteUser(userid)
       return res.status(200).json(response)

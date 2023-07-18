@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express'
+import { Router } from 'express'
 import TopProductController from '../../controllers/client/topProduct.controller'
 
 const router: Router = Router()
