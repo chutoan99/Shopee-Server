@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       Cart.belongsTo(models.Overview, {
         foreignKey: 'itemid',
         targetKey: 'itemid',
-        as: 'detail'
+        as: 'overview'
+      })
+      Cart.belongsTo(models.TierVariation, {
+        foreignKey: 'itemid',
+        targetKey: 'itemid',
+        as: 'tier_variations'
       })
     }
   }

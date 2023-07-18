@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Overview.hasOne(models.Cart, {
         foreignKey: 'itemid',
-        as: 'detail'
+        as: 'overview'
       })
       Overview.hasOne(models.Like, {
         foreignKey: 'itemid',

@@ -9,7 +9,10 @@ const CartService = {
         where: { userid: userid },
         raw: true,
         nest: true,
-        include: [{ model: db.Overview, as: 'detail' }],
+        include: [
+          { model: db.Overview, as: 'overview' },
+          { model: db.TierVariation, as: 'tier_variations' }
+        ],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
       })
       let shopIdArrays = response.reduce((acc: any, curr: any) => {
@@ -43,7 +46,11 @@ const CartService = {
         where: {
           cartid: cartid,
           userid: userid
-        }
+        },
+        include: [
+          { model: db.Overview, as: 'overview' },
+          { model: db.TierVariation, as: 'tier_variations' }
+        ]
       })
       return {
         err: response ? 0 : 1,
