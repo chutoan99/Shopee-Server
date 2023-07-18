@@ -30,7 +30,7 @@ const CartService = {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get all cart.',
         total_cart,
-        response: response ? response : null
+        response: shopIdArrays
       }
     } catch (error) {
       throw new Error('Failed to get all cart.')
