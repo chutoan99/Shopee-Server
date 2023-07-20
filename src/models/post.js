@@ -2,36 +2,22 @@
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Post.belongsTo(models.Description, {
-        foreignKey: 'itemid', //khoa1 phu5
-        targetKey: 'itemid',
-        as: 'Descriptions'
-      })
       Post.belongsTo(models.Category, {
         foreignKey: 'itemid',
         targetKey: 'itemid',
         as: 'categories'
       })
-
       Post.belongsTo(models.Video, {
         foreignKey: 'itemid',
         targetKey: 'itemid',
         as: 'video'
       })
-
       Post.belongsTo(models.Attribute, {
         foreignKey: 'itemid',
         targetKey: 'itemid',
         as: 'attributes'
       })
-
       Post.belongsTo(models.Shop, {
         foreignKey: 'shopid',
         targetKey: 'shopid',
@@ -46,6 +32,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'itemid',
         targetKey: 'itemid',
         as: 'voucher'
+      })
+      Post.hasOne(models.Cart, {
+        foreignKey: 'itemid',
+        as: 'overview'
+      })
+      Post.hasOne(models.Like, {
+        foreignKey: 'itemid',
+        as: 'likeDetail'
+      })
+      Post.hasOne(models.Order, {
+        foreignKey: 'itemid',
+        as: 'orderDetail'
       })
     }
   }
@@ -75,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
       price_max: DataTypes.INTEGER,
       price_min_before_discount: DataTypes.INTEGER,
       price_max_before_discount: DataTypes.INTEGER,
+      description: DataTypes.STRING,
       shop_rating: DataTypes.INTEGER,
       filename: DataTypes.STRING,
       liked: DataTypes.BOOLEAN,

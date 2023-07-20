@@ -3,14 +3,10 @@ import PostController from '../../controllers/client/post.controller'
 
 const router = express.Router()
 
-router.get('/', PostController.GetAllPost)
+router.get('/', PostController.GetPosts)
 
-router.post('/', PostController.AddPost)
+router.get('/search', PostController.SearchPosts)
 
-router.get('/:itemid', PostController.GetPostId)
-
-router.put('/:itemid', PostController.UpdatePost)
-
-router.delete('/:itemid', PostController.DeletePost)
+router.get('/:itemid', PostController.GetPost)
 
 export default router

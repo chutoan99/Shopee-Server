@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       amount: DataTypes.INTEGER,
       option: DataTypes.STRING,
       state: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       note: DataTypes.STRING,
       shiped: DataTypes.BOOLEAN
     },

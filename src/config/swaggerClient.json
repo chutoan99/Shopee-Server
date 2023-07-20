@@ -15,6 +15,7 @@
   "tags": [
     { "name": "Auth", "description": "User authentication and authorization functionality." },
     { "name": "User", "description": "User information and management." },
+    { "name": "Post", "description": "Management of posts or content." },
     { "name": "Cart", "description": "Shopping cart functionality for e-commerce applications." },
     { "name": "Order", "description": "Order management and purchasing process." },
     { "name": "Like", "description": "Functionality for liking" },
@@ -25,8 +26,6 @@
     { "name": "FlashSale", "description": "Sales activities with discounted prices for a limited time." },
     { "name": "Industry", "description": "Industry information." },
     { "name": "Notification", "description": "User notifications within the application." },
-    { "name": "Overview", "description": "General overview" },
-    { "name": "Post", "description": "Management of posts or content." },
     { "name": "SearchSuggestion", "description": "Search suggestions for users" },
     { "name": "Shop", "description": "Shop or business information and management" },
     { "name": "ShopMall", "description": "Management of shopping malls or commercial centers" },
@@ -496,6 +495,165 @@
           },
           "404": {
             "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/post": {
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get all Post in system",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "description": "Number of items per page",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "description": "Number of items per page",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/post/search": {
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get all Post in system",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "description": "Number of items per page",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "description": "Number of items per page",
+            "type": "number"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/post/{itemid}": {
+      "parameters": [
+        {
+          "name": "itemid",
+          "in": "path",
+          "required": true,
+          "description": "ID of Post that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get Post with given ID",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
             "schema": {
               "$ref": "#/definitions/Response_404"
             }
@@ -1564,396 +1722,6 @@
       }
     },
 
-    "/overview": {
-      "get": {
-        "tags": ["Overview"],
-        "summary": "Get all Overview in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Overview"],
-        "summary": "Get all Overview in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/overview/{itemid}": {
-      "parameters": [
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of itemid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Overview"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Overview"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Overview"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/post": {
-      "get": {
-        "tags": ["Post"],
-        "summary": "Get all Post in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Post"],
-        "summary": "Get all Post in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/post/{itemid}": {
-      "parameters": [
-        {
-          "name": "itemid",
-          "in": "path",
-          "required": true,
-          "description": "ID of Post that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Post"],
-        "summary": "Get Post with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Post"],
-        "summary": "put Post with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Post"],
-        "summary": "delete Post with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
     "/searchSuggestion": {
       "get": {
         "tags": ["SearchSuggestion"],
@@ -1963,81 +1731,6 @@
             "description": "success",
             "schema": {
               "$ref": "#/definitions/SearchSuggestion_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/shop": {
-      "get": {
-        "tags": ["Shop"],
-        "summary": "Get all Shop in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Shop_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Shop"],
-        "summary": "Get all Shop in system",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Shop_Response"
             }
           },
           "400": {
@@ -2081,78 +1774,6 @@
       "get": {
         "tags": ["Shop"],
         "summary": "Get Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Shop_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Shop"],
-        "summary": "put Shop with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Shop_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Shop"],
-        "summary": "delete Shop with given ID",
         "responses": {
           "200": {
             "description": "success",
@@ -2487,32 +2108,6 @@
         "response": {
           "type": "object",
           "$ref": "#/definitions/Order"
-        }
-      }
-    },
-
-    "Overview_Response": {
-      "type": "object",
-      "properties": {
-        "err": {
-          "type": "integer",
-          "default": 0
-        },
-        "mes": {
-          "type": "string"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "totalPage": {
-          "type": "integer"
-        },
-        "limit": {
-          "type": "integer"
-        },
-        "response": {
-          "type": "object",
-          "$ref": "#/definitions/Overview"
         }
       }
     },
@@ -2860,35 +2455,6 @@
         "state": { "type": "string" },
         "note": { "type": "string" },
         "shiped": { "type": "boolean" },
-        "createdAt": { "type": "string", "format": "date-time" },
-        "updatedAt": { "type": "string", "format": "date-time" }
-      }
-    },
-
-    "Overview": {
-      "properties": {
-        "id": { "type": "number" },
-        "itemid": { "type": "number" },
-        "shopid": { "type": "number" },
-        "catid": { "type": "number" },
-        "name": { "type": "string" },
-        "image": { "type": "string" },
-        "price": { "type": "number" },
-        "price_min": { "type": "number" },
-        "price_max": { "type": "number" },
-        "stock": { "type": "number" },
-        "historical_sold": { "type": "number" },
-        "price_min_before_discount": { "type": "number" },
-        "price_max_before_discount": { "type": "number" },
-        "discount": { "type": "string" },
-        "shop_rating": { "type": "number" },
-        "filename": { "type": "string" },
-        "liked": { "type": "boolean" },
-        "ctime": { "type": "string", "format": "date-time" },
-        "shop_name": { "type": "string" },
-        "is_official_shop": { "type": "boolean" },
-        "is_service_by_shopee": { "type": "boolean" },
-        "show_free_shipping": { "type": "boolean" },
         "createdAt": { "type": "string", "format": "date-time" },
         "updatedAt": { "type": "string", "format": "date-time" }
       }

@@ -22,7 +22,6 @@ const sendEmail = async (email: any, html: any) => {
   }
   console.log(mainOptions, 'mainOptions')
   const info = await transporter.sendMail(mainOptions)
-  console.log(info, 'info')
   return info
 }
 export default sendEmail

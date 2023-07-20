@@ -3,29 +3,6 @@ import { Op } from 'sequelize'
 import { generateOrderid } from '../../utils/gennerateNumber'
 
 const OrderService = {
-  // GetAllOrder: async (query: any, userid: any) => {
-  //   try {
-  //     const queries = { ...query }
-  //     const response = db.Order.findAll({
-  //       where: queries,
-  //       raw: true,
-  //       nest: true,
-  //       include: [
-  //         { model: db.Overview, as: 'orderDetail' },
-  //         { model: db.User, as: 'user' }
-  //       ],
-  //       attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
-  //     })
-  //     return {
-  //       err: response ? 0 : 1,
-  //       msg: response ? 'OK' : 'Failed to get all Order.',
-  //       response
-  //     }
-  //   } catch (error) {
-  //     throw new Error('Failed to get all Order.')
-  //   }
-  // },
-
   GetAllOrderOfUser: async (userid: any) => {
     try {
       const response = await db.Order.findAll({
@@ -35,7 +12,7 @@ const OrderService = {
         raw: true,
         nest: true,
         include: [
-          { model: db.Overview, as: 'orderDetail' },
+          { model: db.Post, as: 'orderDetail' },
           { model: db.TierVariation, as: 'tier_variations_order' }
         ],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
@@ -64,23 +41,6 @@ const OrderService = {
     }
   },
 
-  // GetOrderId: async (orderid: any) => {
-  //   try {
-  //     const response = await db.Order.findOne({
-  //       where: {
-  //         orderid: orderid
-  //       }
-  //     })
-  //     return {
-  //       err: response ? 0 : 1,
-  //       msg: response ? 'OK' : 'Failed to get Order id.',
-  //       response
-  //     }
-  //   } catch (error) {
-  //     throw new Error('Failed to get Order id.')
-  //   }
-  // },
-
   AddOrder: async (payload: any, userid: any) => {
     try {
       const length = payload.length
@@ -94,6 +54,7 @@ const OrderService = {
           amount: payload[index].amount,
           option: payload[index].option,
           state: payload[index].state,
+          type: payload[index].type,
           note: payload[index].note,
           shiped: false
         })
@@ -115,7 +76,8 @@ const OrderService = {
         {
           amount: payload?.amount,
           option: payload?.option,
-          state: payload?.state
+          state: payload?.state,
+          type: payload.type
         },
         { where: { orderid: orderid, userid: userid } }
       )

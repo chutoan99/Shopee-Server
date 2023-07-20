@@ -35,8 +35,6 @@ const InsertControllers = {
         insertPost(item),
         insertAttributes(item),
         insertTierVariations(item),
-        insertDescription(item),
-        insertOverview(item),
         insertCategory(item),
         insertVoucherInfo(item),
         insertVideoInfoList(item),
@@ -71,7 +69,6 @@ const InsertControllers = {
           try {
             await insertComment(item)
             await insertItemRatingReply(item)
-            console.log(item?.itemid, index, i)
           } catch (error) {
             console.error(error)
           }
@@ -96,13 +93,11 @@ const InsertControllers = {
         const hotItems = require(`../../../../data/post/hot_items_${index}.json`).data.items
         for (const [i, item] of hotItems.entries()) {
           try {
-            await insertOverview(item)
-            await insertPost(item)
-            await insertTierVariations(item)
-            await insertVideoInfoList(item)
-            await insertVoucherInfo(item)
-            await insertDeepDiscountSkin(item)
-            console.log(item?.itemid, index, i)
+            insertPost(item)
+            insertTierVariations(item)
+            insertVideoInfoList(item)
+            insertVoucherInfo(item)
+            insertDeepDiscountSkin(item)
           } catch (error) {
             console.error(error)
           }
@@ -135,7 +130,8 @@ export default InsertControllers
 const insertPost = async (item: any) => {
   await db.Post.findOrCreate({
     where: {
-      itemid: item?.itemid
+      itemid: item?.itemid,
+      shopid: item?.shopid
     },
     defaults: {
       itemid: item?.itemid,
@@ -148,6 +144,7 @@ const insertPost = async (item: any) => {
       catid: item?.catid,
       cmt_count: item?.cmt_count,
       discount: item?.discount,
+      description: item?.description,
       raw_discount: item?.raw_discount,
       size_chart: item?.size_chart === null ? null : `https://cf.shopee.vn/file/${item?.size_chart}`,
       shop_name: item?.shop_name,
@@ -176,45 +173,6 @@ const insertPost = async (item: any) => {
       is_video: typeof item?.video_info_list[0]?.video_id !== 'undefined',
       is_voucher: typeof item?.voucher_info?.promotion_id !== 'undefined',
       is_attributes: typeof item?.attributes?.[0].name !== 'undefined',
-      ctime: formatDate(item?.ctime),
-      createdAt: formatDate(item?.ctime)
-    }
-  })
-}
-
-const insertDescription = async (item: any) => {
-  await db.Description.findOrCreate({
-    where: { itemid: item?.itemid },
-    defaults: {
-      itemid: item?.itemid,
-      description: item?.description
-    }
-  })
-}
-
-const insertOverview = async (item: any) => {
-  await db.Overview.findOrCreate({
-    where: { itemid: item?.itemid },
-    defaults: {
-      itemid: item?.itemid,
-      shopid: item?.shopid,
-      catid: item?.catid,
-      name: item?.name,
-      image: item?.image === '' ? null : `https://cf.shopee.vn/file/${item?.image}`,
-      stock: item?.stock,
-      historical_sold: item?.historical_sold,
-      price: +item?.price / 100000,
-      price_min: +item?.price_min / 100000,
-      price_max: +item?.price_max / 100000,
-      price_min_before_discount: ((+item.price_min / 100) * (100 - item?.raw_discount)) / 100000,
-      price_max_before_discount: ((item.price_max / 100) * (100 - item?.raw_discount)) / 100000,
-      discount: item?.discount,
-      shop_rating: item?.shop_rating,
-      shop_name: item?.shop_name,
-      liked: item?.liked ? true : false,
-      is_official_shop: item?.is_official_shop,
-      is_service_by_shopee: item?.is_service_by_shopee,
-      show_free_shipping: item?.show_free_shipping,
       ctime: formatDate(item?.ctime),
       createdAt: formatDate(item?.ctime)
     }
@@ -401,7 +359,7 @@ const insertHomeCategory = async () => {
 const insertFlashSale = async () => {
   flash_sale.data.items?.forEach(async (item: any) => {
     await db.FlashSale.findOrCreate({
-      where: { itemid: item?.itemid },
+      where: { itemid: item?.itemid, shopid: item?.shopid },
       defaults: {
         itemid: item?.itemid,
         shopid: item?.shopid,
@@ -448,7 +406,7 @@ const insertTopProduct = async () => {
 
 const insertComment = async (item: any) => {
   await db.Comment.findOrCreate({
-    where: { cmtid: item?.cmtid },
+    where: { cmtid: item?.cmtid, orderid: item?.orderid },
     defaults: {
       orderid: item?.orderid,
       itemid: item?.itemid,

@@ -6,7 +6,7 @@ const GetAllLikeService = {
         raw: true,
         nest: true,
         where: { userid: userid },
-        include: [{ model: db.Overview, as: 'likeDetail' }],
+        include: [{ model: db.Post, as: 'likeDetail' }],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
       })
       return {

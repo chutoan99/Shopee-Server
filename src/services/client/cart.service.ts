@@ -1,6 +1,5 @@
 const db = require('../../models/index')
 import { generateCartid } from '../../utils/gennerateNumber'
-import { Op } from 'sequelize'
 
 const CartService = {
   GetAllCart: async (userid: any) => {
@@ -10,7 +9,7 @@ const CartService = {
         raw: true,
         nest: true,
         include: [
-          { model: db.Overview, as: 'overview' },
+          { model: db.Post, as: 'overview' },
           { model: db.TierVariation, as: 'tier_variations' }
         ],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
@@ -40,35 +39,13 @@ const CartService = {
     }
   },
 
-  GetCartId: async (cartid: any, userid: any) => {
-    try {
-      const response = await db.Cart.findOne({
-        where: {
-          cartid: cartid,
-          userid: userid
-        },
-        include: [
-          { model: db.Overview, as: 'overview' },
-          { model: db.TierVariation, as: 'tier_variations' }
-        ]
-      })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get cart id.',
-        response: response
-      }
-    } catch (error) {
-      throw new Error('Failed to get cart id.')
-    }
-  },
-
   AddCart: async (payload: any, userid: any) => {
     try {
       let response = {}
       const condition = {
         userid: userid,
-        itemid: payload.itemid
-        // option: payload.option
+        itemid: payload.itemid,
+        option: payload.option
       }
       response = await db.Cart.findOne({
         where: condition

@@ -9,18 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Overview.hasOne(models.Cart, {
-        foreignKey: 'itemid',
-        as: 'overview'
-      })
-      Overview.hasOne(models.Like, {
-        foreignKey: 'itemid',
-        as: 'likeDetail'
-      })
-      Overview.hasOne(models.Order, {
-        foreignKey: 'itemid',
-        as: 'orderDetail'
-      })
     }
   }
   Overview.init(

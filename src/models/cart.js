@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Cart.belongsTo(models.Overview, {
+      Cart.belongsTo(models.Post, {
         foreignKey: 'itemid',
         targetKey: 'itemid',
         as: 'overview'

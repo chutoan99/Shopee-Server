@@ -22,6 +22,7 @@ module.exports = {
       raw_discount: { type: Sequelize.INTEGER },
       size_chart: { type: Sequelize.STRING },
       shop_name: { type: Sequelize.STRING },
+      description: { type: Sequelize.STRING(10000) },
       transparent_background_image: { type: Sequelize.STRING },
       images: { type: Sequelize.STRING(1000) },
       view_count: { type: Sequelize.INTEGER },

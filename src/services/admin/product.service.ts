@@ -4,7 +4,21 @@ import { Op } from 'sequelize'
 import { generateItemid } from '../../utils/gennerateNumber'
 
 const ProductService = {
-  GetAllProduct: async ({ page, limit, order, name, price, shopid }: { page: any; limit: any; order: any; name: any; price: any; shopid: any }) => {
+  GetAllProduct: async ({
+    page,
+    limit,
+    order,
+    name,
+    price,
+    shopid
+  }: {
+    page: any
+    limit: any
+    order: any
+    name: any
+    price: any
+    shopid: any
+  }) => {
     try {
       const queries: any = { raw: true, nest: true }
       const offset = !page || +page <= 1 ? 0 : +page - 1
@@ -17,7 +31,7 @@ const ProductService = {
 
       queries.offset = offset * fLimit
       queries.limit = fLimit
-      const response = await db.Overview.findAndCountAll({
+      const response = await db.Post.findAndCountAll({
         where: { ...query },
         ...queries
       })
@@ -38,7 +52,7 @@ const ProductService = {
   AddProduct: async (shopid: any, payload: any, fileData: any) => {
     try {
       const itemid = generateItemid()
-      const response = await db.Overview.create({
+      const response = await db.Post.create({
         itemid,
         shopid: shopid,
         name: payload?.name,
@@ -88,13 +102,6 @@ const ProductService = {
         raw: true,
         nest: true,
         include: [
-          {
-            model: db.Description,
-            as: 'Descriptions',
-            attributes: {
-              exclude: ['id', 'itemid', 'createdAt', 'updatedAt']
-            }
-          },
           {
             model: db.Category,
             as: 'categories',
@@ -168,7 +175,7 @@ const ProductService = {
         payload.image = fileData.path
       }
       console.log(fileData, 'fileData')
-      const response = await db.Overview.update(
+      const response = await db.Post.update(
         {
           name: payload?.name,
           image: payload?.image,
@@ -200,7 +207,7 @@ const ProductService = {
 
   DeleteProduct: async (itemid: any, fileName: any) => {
     try {
-      const response = await db.Overview.destroy({
+      const response = await db.Post.destroy({
         where: { itemid }
       })
       cloudinary.api.delete_resources(fileName)

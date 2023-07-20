@@ -15,6 +15,7 @@ module.exports = {
       shopid: { type: Sequelize.BIGINT },
       amount: { type: Sequelize.INTEGER },
       option: { type: Sequelize.STRING },
+      type: { type: Sequelize.INTEGER },
       state: { type: Sequelize.STRING },
       note: { type: Sequelize.STRING },
       shiped: { type: Sequelize.BOOLEAN },
