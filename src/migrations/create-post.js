@@ -3,20 +3,19 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Posts', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      itemid: { type: Sequelize.BIGINT },
+      itemid: { type: Sequelize.BIGINT, primaryKey: true, allowNull: false },
       shopid: { type: Sequelize.BIGINT },
+      attributeid: { type: Sequelize.BIGINT },
       currency: { type: Sequelize.STRING },
       stock: { type: Sequelize.INTEGER },
       status: { type: Sequelize.INTEGER },
       sold: { type: Sequelize.INTEGER },
       liked_count: { type: Sequelize.INTEGER },
       catid: { type: Sequelize.INTEGER },
+      tierid: { type: Sequelize.BIGINT },
+      video_id: { type: Sequelize.STRING },
+      promotion_id: { type: Sequelize.BIGINT },
+      discountid: { type: Sequelize.BIGINT },
       cmt_count: { type: Sequelize.INTEGER },
       discount: { type: Sequelize.STRING },
       raw_discount: { type: Sequelize.INTEGER },
@@ -49,6 +48,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      id: {
+        type: Sequelize.INTEGER
       }
     })
   },

@@ -1,3 +1,5 @@
+import { formatCategory } from '~/utils/formatCategory'
+
 const db = require('../../models/index')
 
 const CategoriesTreeService = {
@@ -8,7 +10,7 @@ const CategoriesTreeService = {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get all  Categories tree',
         total: response.length,
-        response
+        response: formatCategory(response)
       }
     } catch (error) {
       throw new Error('Failed to get all  Categories tree')

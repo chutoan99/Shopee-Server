@@ -12,7 +12,7 @@ router.post('/register', AuthClientController.Register, sendEmail)
 
 router.post('/login', AuthClientController.Login)
 
-router.get('/forgotPassword', AuthClientController.forgotPassword)
+router.post('/forgotPassword', AuthClientController.forgotPassword)
 
 router.put('/resetPassword', AuthClientController.resetPassword)
 

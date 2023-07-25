@@ -3,54 +3,32 @@ const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {
-      Post.belongsTo(models.Category, {
-        foreignKey: 'itemid',
-        targetKey: 'itemid',
-        as: 'categories'
-      })
-      Post.belongsTo(models.Video, {
-        foreignKey: 'itemid',
-        targetKey: 'itemid',
-        as: 'video'
-      })
-      Post.belongsTo(models.Attribute, {
-        foreignKey: 'itemid',
-        targetKey: 'itemid',
-        as: 'attributes'
-      })
-      Post.belongsTo(models.Shop, {
-        foreignKey: 'shopid',
-        targetKey: 'shopid',
-        as: 'shop_info'
-      })
-      Post.belongsTo(models.DeepDiscountSkin, {
-        foreignKey: 'itemid',
-        targetKey: 'itemid',
-        as: 'deep_discount_skin'
-      })
-      Post.belongsTo(models.VoucherProduct, {
-        foreignKey: 'itemid',
-        targetKey: 'itemid',
-        as: 'voucher'
-      })
-      Post.hasOne(models.Cart, {
-        foreignKey: 'itemid',
-        as: 'overview'
-      })
-      Post.hasOne(models.Like, {
-        foreignKey: 'itemid',
-        as: 'likeDetail'
-      })
-      Post.hasOne(models.Order, {
-        foreignKey: 'itemid',
-        as: 'orderDetail'
-      })
+      Post.belongsTo(models.Industry, { foreignKey: 'catid', targetKey: 'catid', as: 'categories' })
+      Post.belongsTo(models.TierVariation, { foreignKey: 'tierid', targetKey: 'tierid', as: 'tier_variations' })
+      Post.belongsTo(models.Video, { foreignKey: 'video_id', targetKey: 'video_id', as: 'video' }) // done
+      Post.belongsTo(models.VoucherProduct, { foreignKey: 'promotion_id', targetKey: 'promotion_id', as: 'voucher' }) // done
+      Post.belongsTo(models.Attribute, { foreignKey: 'attributeid', targetKey: 'attributeid', as: 'attributes' })
+      Post.belongsTo(models.Shop, { foreignKey: 'shopid', targetKey: 'shopid', as: 'shop_info' })
+      Post.belongsTo(models.DeepDiscountSkin, { foreignKey: 'discountid', targetKey: 'discountid', as: 'deep_discount_skin' })
+      Post.hasOne(models.Cart, { foreignKey: 'itemid', as: 'overview' })
+      Post.hasOne(models.Like, { foreignKey: 'itemid', as: 'likeDetail' })
+      Post.hasOne(models.Order, { foreignKey: 'itemid', as: 'orderDetail' })
     }
   }
   Post.init(
     {
-      itemid: DataTypes.BIGINT,
+      itemid: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        allowNull: false,
+        unique: true
+      },
       shopid: DataTypes.BIGINT,
+      video_id: DataTypes.STRING,
+      tierid: DataTypes.BIGINT,
+      attributeid: DataTypes.BIGINT,
+      promotion_id: DataTypes.BIGINT,
+      discountid: DataTypes.BIGINT,
       currency: DataTypes.STRING,
       stock: DataTypes.INTEGER,
       status: DataTypes.INTEGER,

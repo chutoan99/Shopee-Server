@@ -9,8 +9,14 @@ const CartService = {
         raw: true,
         nest: true,
         include: [
-          { model: db.Post, as: 'overview' },
-          { model: db.TierVariation, as: 'tier_variations' }
+          { model: db.Post, as: 'overview', attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } },
+          {
+            model: db.TierVariation,
+            as: 'cart_tier_variations',
+            attributes: {
+              exclude: ['id', 'images', 'createdAt', 'updatedAt']
+            }
+          }
         ],
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
       })
@@ -41,29 +47,33 @@ const CartService = {
 
   AddCart: async (payload: any, userid: any) => {
     try {
-      let response = {}
       const condition = {
         userid: userid,
         itemid: payload.itemid,
         option: payload.option
       }
-      response = await db.Cart.findOne({
-        where: condition
-      }).then((response: any) => {
-        if (response)
-          return db.Cart.update(
-            {
-              userid: userid,
-              itemid: payload.itemid,
-              shopid: payload.shopid,
-              option: payload.option,
-              amount: response.dataValues.amount + 1
-            },
-            {
-              where: condition
-            }
-          )
-        return db.Cart.create({
+      const response = await db.Cart.findOne({ where: condition })
+
+      if (response) {
+        const result = await db.Cart.update(
+          {
+            userid: userid,
+            itemid: payload.itemid,
+            shopid: payload.shopid,
+            option: payload.option,
+            amount: response.dataValues.amount + 1
+          },
+          {
+            where: condition
+          }
+        )
+        return {
+          err: result ? 0 : 1,
+          msg: result ? 'OK' : 'Failed to add cart.',
+          response: result ? result : null
+        }
+      } else {
+        const result = await db.Cart.create({
           cartid: generateCartid(),
           userid: userid,
           itemid: payload.itemid,
@@ -71,11 +81,12 @@ const CartService = {
           option: payload.option,
           amount: payload.amount
         })
-      })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to add cart.',
-        response: response ? response : null
+
+        return {
+          err: result ? 0 : 1,
+          msg: result ? 'OK' : 'Failed to add cart.',
+          response: result ? result : null
+        }
       }
     } catch (error) {
       throw new Error('Failed to add cart.')

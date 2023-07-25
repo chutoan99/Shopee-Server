@@ -3,13 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Shops', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      shopid: { type: Sequelize.BIGINT },
+      shopid: { type: Sequelize.BIGINT, allowNull: false, primaryKey: true },
       userid: { type: Sequelize.STRING },
       is_official_shop: { type: Sequelize.BOOLEAN },
       item_count: { type: Sequelize.INTEGER },
@@ -33,7 +27,10 @@ module.exports = {
       followed: { type: Sequelize.BOOLEAN },
       last_active_time: { type: Sequelize.BIGINT },
       createdAt: { allowNull: false, type: Sequelize.DATE },
-      updatedAt: { allowNull: false, type: Sequelize.DATE }
+      updatedAt: { allowNull: false, type: Sequelize.DATE },
+      id: {
+        type: Sequelize.INTEGER
+      }
     })
   },
   async down(queryInterface, Sequelize) {

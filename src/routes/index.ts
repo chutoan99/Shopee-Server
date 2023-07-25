@@ -15,9 +15,9 @@ import UserRoute from './client/user.route'
 import CommentClientRoute from './client/comment.route'
 import AuthClientRoute from './client/auth.route'
 import CategoryTreeRoute from './client/categoryTree.route'
-import OverviewRoute from './client/overview.route'
 import OrderClientRoute from './client/order.route'
 import TopProductRoute from './client/topProduct.route'
+import SearchRoute from '../routes/client/search.route'
 //? ADMIN
 import ProductRoute from './admin/product.route'
 import CommentRoute from './admin/comment.route'
@@ -48,7 +48,7 @@ const initRoutes = (app: Express) => {
   app.use('/api/client/like', LikeRoute)
   app.use('/api/client/notification', NotificationRoute)
   app.use('/api/client/order', OrderClientRoute)
-  // app.use('/api/client/overview', OverviewRoute)
+  app.use('/api/client/search', SearchRoute)
   app.use('/api/client/post', PostRoute)
   app.use('/api/client/searchSuggestion', searchSuggestionRoute)
   app.use('/api/client/shop', ShopRoute)
@@ -62,7 +62,7 @@ const initRoutes = (app: Express) => {
   app.use('/api/admin/auth', AuthRoute)
   app.use('/api/admin/userInfo', UserProfileRoute)
   //? INSERT
-  app.use('/api/insert', InsertRoute)
+  // app.use('/api/insert', InsertRoute)
   //? CRAWL
   // app.use('/api/crawl', CrawlRoute)
   // Middleware for /api-docs-admin , /api-docs-client

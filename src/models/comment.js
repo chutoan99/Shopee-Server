@@ -1,28 +1,17 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      Comment.belongsTo(models.CommentReply, {
-        foreignKey: 'itemid', //khoa1 phu5
-        targetKey: 'itemid',
-        as: 'CommentReply'
-      })
-    }
-  }
+  class Comment extends Model {}
   Comment.init(
     {
+      cmtid: DataTypes.BIGINT,
       orderid: DataTypes.BIGINT,
+      parent_cmtid: DataTypes.BIGINT,
       itemid: DataTypes.BIGINT,
       userid: DataTypes.STRING,
       shopid: DataTypes.BIGINT,
-      cmtid: DataTypes.BIGINT,
+      level: DataTypes.INTEGER,
+      is_shop: DataTypes.BOOLEAN,
       rating: DataTypes.INTEGER,
       status: DataTypes.INTEGER,
       rating_star: DataTypes.INTEGER,
@@ -36,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       model_name: DataTypes.STRING,
       options: DataTypes.TEXT,
       liked: DataTypes.BOOLEAN,
+      is_replied: DataTypes.BOOLEAN,
       mtime: DataTypes.DATE,
       ctime: DataTypes.DATE
     },

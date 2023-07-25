@@ -32,37 +32,6 @@ const PostController = {
       internalServerError(res)
     }
   }
-
-  // AddPost: async (req: Request, res: Response) => {
-  //   const payload = req.body
-  //   try {
-  //     const response = await PostService.CreatePost(payload)
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // },
-
-  // UpdatePost: async (req: Request, res: Response) => {
-  //   try {
-  //     const { itemid } = req.params
-  //     const payload = req.body
-  //     const response = await PostService.UpdatePost(itemid, payload)
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // },
-
-  // DeletePost: async (req: Request, res: Response) => {
-  //   const { itemid } = req.params
-  //   try {
-  //     const response = await PostService.DeletePost(itemid)
-  //     return res.status(200).json(response)
-  //   } catch (error) {
-  //     internalServerError(res)
-  //   }
-  // }
 }
 
 export default PostController

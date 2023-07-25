@@ -3,15 +3,8 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-
+      userid: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
       sex: { type: Sequelize.STRING },
-      userid: { type: Sequelize.STRING },
       shopid: { type: Sequelize.BIGINT },
       password: { type: Sequelize.STRING },
       email: { type: Sequelize.STRING },
@@ -26,14 +19,9 @@ module.exports = {
       passwordResetToken: { type: Sequelize.STRING },
       passwordResetExpires: { type: Sequelize.STRING },
       passwordChangedAt: { type: Sequelize.STRING },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      createdAt: { allowNull: false, type: Sequelize.DATE },
+      updatedAt: { allowNull: false, type: Sequelize.DATE },
+      id: { type: Sequelize.INTEGER }
     })
   },
   async down(queryInterface, Sequelize) {

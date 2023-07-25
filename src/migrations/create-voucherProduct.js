@@ -3,16 +3,10 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('VoucherProducts', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      itemid: { type: Sequelize.BIGINT },
-      promotion_id: { type: Sequelize.BIGINT },
+      promotion_id: { type: Sequelize.BIGINT, primaryKey: true, allowNull: false },
       voucher_code: { type: Sequelize.STRING },
       label: { type: Sequelize.STRING },
+      id: { type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -3,22 +3,17 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Orders', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      orderid: { type: Sequelize.STRING },
+      orderid: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
       userid: { type: Sequelize.STRING },
-      itemid: { type: Sequelize.BIGINT },
       shopid: { type: Sequelize.BIGINT },
-      amount: { type: Sequelize.INTEGER },
-      option: { type: Sequelize.STRING },
       type: { type: Sequelize.INTEGER },
       state: { type: Sequelize.STRING },
+      total_num_items: { type: Sequelize.INTEGER },
       note: { type: Sequelize.STRING },
-      shiped: { type: Sequelize.BOOLEAN },
+      amount: { type: Sequelize.STRING },
+      option: { type: Sequelize.STRING },
+      item_groups_id: { type: Sequelize.STRING },
+      final_total: { type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -26,6 +21,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      id: {
+        type: Sequelize.INTEGER
       }
     })
   },

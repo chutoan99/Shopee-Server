@@ -17,7 +17,6 @@ module.exports = {
       unselected_image: { type: Sequelize.STRING },
       selected_image: { type: Sequelize.STRING },
       level: { type: Sequelize.INTEGER },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

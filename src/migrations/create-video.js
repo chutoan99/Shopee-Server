@@ -6,14 +6,7 @@ const { INTEGER } = require('sequelize')
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Videos', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      itemid: { type: Sequelize.BIGINT },
-      video_id: { type: Sequelize.STRING },
+      video_id: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
       thumb_url: { type: Sequelize.STRING },
       duration: { type: Sequelize.INTEGER },
       version: { type: Sequelize.INTEGER },
@@ -23,7 +16,8 @@ module.exports = {
       profile: { type: Sequelize.STRING },
       url: { type: Sequelize.STRING },
       createdAt: { allowNull: false, type: Sequelize.DATE },
-      updatedAt: { allowNull: false, type: Sequelize.DATE }
+      updatedAt: { allowNull: false, type: Sequelize.DATE },
+      id: { type: Sequelize.INTEGER }
     })
   },
   async down(queryInterface, Sequelize) {

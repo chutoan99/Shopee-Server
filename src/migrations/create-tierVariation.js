@@ -3,16 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('TierVariations', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      itemid: { type: Sequelize.BIGINT },
+      tierid: { type: Sequelize.BIGINT, primaryKey: true, allowNull: false },
       name: { type: Sequelize.TEXT },
       option: { type: Sequelize.TEXT },
       images: { type: Sequelize.TEXT },
+      id: { type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

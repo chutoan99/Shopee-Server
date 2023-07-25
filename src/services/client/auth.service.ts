@@ -10,11 +10,6 @@ import templateResetPassword from '../../templates/reset'
 const hashPassWord = (password: any) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 }
-const avatar = (sex: number) => {
-  sex === 0
-    ? 'https://imgs.search.brave.com/NMbKJRcDath4I02VHl0t8tYf4UJSAmftuegWj3ZCbYs/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTcuanBn'
-    : 'https://imgs.search.brave.com/GgQ8DyHg0f1QxTAoZOmh4fYbylAOXHK903G1j_P_EaE/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTQuanBn'
-}
 const AuthService = {
   Register: async (payload: any) => {
     try {
@@ -24,8 +19,9 @@ const AuthService = {
           userid: generateUserid(),
           shopid: generateShopid(),
           password: hashPassWord(payload?.password),
-          avatar: payload?.avatar || avatar(payload.sex),
-          sex: +payload.sex || 0,
+          avatar:
+            'https://imgs.search.brave.com/NMbKJRcDath4I02VHl0t8tYf4UJSAmftuegWj3ZCbYs/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTcuanBn',
+          sex: 0,
           role: 'client',
           name: payload?.name,
           address: payload?.address,
@@ -96,7 +92,7 @@ const AuthService = {
       const user = await db.User.findOne({ where: { email: email } })
       if (!user) {
         return {
-          err: 0,
+          err: -1,
           msg: 'cannot not found email'
         }
       }
@@ -107,10 +103,10 @@ const AuthService = {
         { passwordResetToken: passwordResetToken, passwordResetExpires: passwordResetExpires },
         { where: { email: email } }
       )
-      const response = await sendEmail(email, templateResetPassword(resetToken))
+      const response = await sendEmail(email, templateResetPassword(email, resetToken))
       return {
         err: response ? 0 : 2,
-        msg: response ? 'ok' : 'Email or Password is wrong',
+        msg: response ? 'ok' : 'Email not ',
         response: response ? response : null
       }
     } catch (error) {

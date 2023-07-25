@@ -19,6 +19,7 @@
     { "name": "Cart", "description": "Shopping cart functionality for e-commerce applications." },
     { "name": "Order", "description": "Order management and purchasing process." },
     { "name": "Like", "description": "Functionality for liking" },
+    { "name": "Search", "description": "Functionality for searching" },
     { "name": "Banner", "description": "Management of banners and advertisement images." },
     { "name": "BatchList", "description": "List of items in batches." },
     { "name": "CategoryTree", "description": "Hierarchical representation of categories." },
@@ -954,6 +955,92 @@
             "schema": {
               "$ref": "#/definitions/Product_Response"
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
+
+    "/search": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Get all Search in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Search"],
+        "summary": "Get all Search in system",
+        "security": [{ "Bearer": [] }],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that contains the login credentials",
+            "required": false,
+            "schema": {
+              "properties": {
+                "text": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
           },
           "400": {
             "description": "Bad Request",

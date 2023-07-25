@@ -1,5 +1,5 @@
 const db = require('../../models/index')
-const GetAllLikeService = {
+const LikeService = {
   GetAllLike: async (userid: string) => {
     try {
       const response = await db.Like.findAll({
@@ -57,4 +57,4 @@ const GetAllLikeService = {
   }
 }
 
-export { GetAllLikeService }
+export { LikeService }

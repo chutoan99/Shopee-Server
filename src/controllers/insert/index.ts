@@ -1,6 +1,5 @@
 const db = require('../../models/index')
 import bcrypt from 'bcrypt'
-
 const datas = require('../../../../data/data')
 const HomeCategory = require('../../../../data/category_tree.json')
 const banner = require('../../../../data/banner.json')
@@ -16,12 +15,21 @@ const formatDate = (time: any) => {
   return date.toLocaleString()
 }
 
+const hashPassWord = (password: any) => {
+  const result = bcrypt.hashSync(password, bcrypt.genSaltSync(12))
+  return result
+}
+
 const InsertControllers = {
   Industries: async (req: any, res: any) => {
     try {
       for (let index = 1; index < 15; index++) {
         const global_cats = require(`../../../../data/cate/cate_${index}.json`).data.global_cats
-        global_cats.map((item: any, i: any) => insertIndustry(item))
+        await global_cats.map((item: any, i: any) => {
+          for (let j = 0; j < item?.path?.length; j++) {
+            insertIndustry(item, j)
+          }
+        })
       }
       res.status(200).send('Industries processed successfully.')
     } catch (error) {
@@ -30,33 +38,36 @@ const InsertControllers = {
   },
 
   Insert: async (req: any, res: any) => {
-    const promises = datas?.items.map(async (item: any) => {
-      await Promise.all([
-        insertPost(item),
-        insertAttributes(item),
-        insertTierVariations(item),
-        insertCategory(item),
-        insertVoucherInfo(item),
-        insertVideoInfoList(item),
+    try {
+      for (const item of datas?.items || undefined) {
+        insertPost(item)
+        insertAttributes(item)
+        insertTierVariations(item)
+        insertVoucherInfo(item)
+        insertVideoInfoList(item)
         insertDeepDiscountSkin(item)
-      ])
-    })
-    await Promise.all(promises)
-    res.status(200).send('insert processed successfully.')
+      }
+      res.status(200).send('insert processed successfully.')
+    } catch {
+      res.status(500).send('Internal Server Error')
+    }
   },
 
   App: async (req: any, res: any) => {
-    await Promise.all([
-      insertHomeCategory(),
-      insertBanner(),
-      insertShopMall(),
-      insertSearchSuggestion(),
-      insertNotify(),
-      insertBatchList(),
-      insertTopProduct(),
+    try {
+      insertHomeCategory()
+      insertBanner()
+      insertShopMall()
+      insertSearchSuggestion()
+      insertNotify()
+      insertBatchList()
+      insertTopProduct()
       insertFlashSale()
-    ])
-    res.status(200).send('app processed successfully.')
+      res.status(200).send('app processed successfully.')
+    } catch (error) {
+      console.log('loi server', error)
+      res.status(500).send('Internal Server Error')
+    }
   },
 
   Comment: async (req: any, res: any) => {
@@ -65,19 +76,9 @@ const InsertControllers = {
       const { start, end } = req.params
       for (let index = start; index < end; index++) {
         const ratings = require(`../../../../data/ratings/rating_${index}.json`).data?.ratings
-        for (const [i, item] of ratings.entries()) {
-          try {
-            await insertComment(item)
-            await insertItemRatingReply(item)
-          } catch (error) {
-            console.error(error)
-          }
-        }
-        // .forEach(async (item: any, i: any) => {
-        //   for (const item of ratings) {
-
-        //   }
-        // })
+        ratings.forEach((item: any) => {
+          insertComment(item)
+        })
       }
       res.status(200).send('comment processed successfully.')
     } catch (error) {
@@ -91,17 +92,13 @@ const InsertControllers = {
       const { start, end } = req.params
       for (let index = start; index < end; index++) {
         const hotItems = require(`../../../../data/post/hot_items_${index}.json`).data.items
-        for (const [i, item] of hotItems.entries()) {
-          try {
-            insertPost(item)
-            insertTierVariations(item)
-            insertVideoInfoList(item)
-            insertVoucherInfo(item)
-            insertDeepDiscountSkin(item)
-          } catch (error) {
-            console.error(error)
-          }
-        }
+        hotItems.forEach((item: any) => {
+          insertPost(item)
+          insertTierVariations(item)
+          insertVideoInfoList(item)
+          insertVoucherInfo(item)
+          insertDeepDiscountSkin(item)
+        })
       }
       res.status(200).send('post processed successfully.')
     } catch (error) {
@@ -127,13 +124,9 @@ const InsertControllers = {
 }
 export default InsertControllers
 
-const insertPost = async (item: any) => {
-  await db.Post.findOrCreate({
-    where: {
-      itemid: item?.itemid,
-      shopid: item?.shopid
-    },
-    defaults: {
+const insertPost = (item: any) => {
+  db.Post.create(
+    {
       itemid: item?.itemid,
       shopid: item?.shopid,
       currency: item?.currency,
@@ -141,6 +134,11 @@ const insertPost = async (item: any) => {
       status: item?.status,
       sold: item?.sold,
       liked_count: item?.liked_count,
+      promotion_id: item?.voucher_info?.promotion_id,
+      video_id: item?.video_info_list[0]?.video_id,
+      discountid: item?.itemid,
+      tierid: item?.itemid,
+      attributeid: item?.itemid,
       catid: item?.catid,
       cmt_count: item?.cmt_count,
       discount: item?.discount,
@@ -175,17 +173,17 @@ const insertPost = async (item: any) => {
       is_attributes: typeof item?.attributes?.[0].name !== 'undefined',
       ctime: formatDate(item?.ctime),
       createdAt: formatDate(item?.ctime)
-    }
-  })
+    },
+    { ignoreDuplicates: true }
+  )
 }
 
-const insertTierVariations = async (item: any) => {
+const insertTierVariations = (item: any) => {
   if (item?.tier_variations[0]?.name !== '') {
-    item?.tier_variations?.map(async (ele: any) => {
-      await db.TierVariation.findOrCreate({
-        where: { itemid: item.itemid },
-        defaults: {
-          itemid: item.itemid,
+    item?.tier_variations?.map((ele: any) => {
+      db.TierVariation.create(
+        {
+          tierid: item.itemid,
           name: ele?.name,
           option: JSON.stringify(ele?.options),
           images:
@@ -196,55 +194,43 @@ const insertTierVariations = async (item: any) => {
                     return `https://cf.shopee.vn/file/${item}`
                   })
                 )
-        }
-      })
+        },
+        { ignoreDuplicates: true }
+      )
     })
   }
 }
 
-const insertAttributes = async (item: any) => {
+const insertAttributes = (item: any) => {
   if (typeof item?.attributes?.[0].name !== 'undefined') {
-    await db.Attribute.findOrCreate({
-      where: { itemid: item.itemid },
-      defaults: {
+    db.Attribute.create(
+      {
+        attributeid: item.itemid,
         name: JSON.stringify(item?.attributes?.map((item: any) => item?.name)),
         value: JSON.stringify(item?.attributes?.map((item: any) => item?.value))
-      }
-    })
+      },
+      { ignoreDuplicates: true }
+    )
   }
 }
 
-const insertCategory = async (item: any) => {
-  await db.Category.findOrCreate({
-    where: { itemid: item?.itemid },
-    defaults: {
-      itemid: item?.itemid,
-      display_name: JSON.stringify(item?.categories?.map((ele: any) => ele?.display_name)),
-      catid: JSON.stringify(item?.categories?.map((ele: any) => ele?.catid))
-    }
-  })
-}
-
-const insertVoucherInfo = async (item: any) => {
+const insertVoucherInfo = (item: any) => {
   if (typeof item?.voucher_info?.promotion_id !== 'undefined') {
-    await db.VoucherProduct.findOrCreate({
-      where: { itemid: item?.itemid },
-      defaults: {
-        itemid: item?.itemid,
+    db.VoucherProduct.create(
+      {
         promotion_id: item?.voucher_info?.promotion_id,
         voucher_code: item?.voucher_info?.voucher_code,
         label: item?.voucher_info?.voucher_code
-      }
-    })
+      },
+      { ignoreDuplicates: true }
+    )
   }
 }
 
-const insertVideoInfoList = async (item: any) => {
+const insertVideoInfoList = (item: any) => {
   if (typeof item?.video_info_list[0]?.video_id !== 'undefined') {
-    await db.Video.findOrCreate({
-      where: { itemid: item?.itemid },
-      defaults: {
-        itemid: item?.itemid,
+    db.Video.create(
+      {
         video_id: item?.video_info_list[0]?.video_id,
         thumb_url: item?.video_info_list[0]?.thumb_url,
         duration: item?.video_info_list[0]?.duration,
@@ -254,29 +240,30 @@ const insertVideoInfoList = async (item: any) => {
         url: item?.video_info_list[0]?.default_format?.url,
         width: item?.video_info_list[0]?.default_format?.width,
         height: item?.video_info_list[0]?.default_format?.height
-      }
-    })
+      },
+      { ignoreDuplicates: true }
+    )
   }
 }
 
-const insertDeepDiscountSkin = async (item: any) => {
+const insertDeepDiscountSkin = (item: any) => {
   if (item?.deep_discount_skin?.skin_data?.promo_label?.promotion_price !== '') {
-    await db.DeepDiscountSkin.findOrCreate({
-      where: { itemid: item?.itemid },
-      defaults: {
-        itemid: item?.itemid,
+    db.DeepDiscountSkin.create(
+      {
+        discountid: item?.itemid,
         promotion_price: item?.deep_discount_skin?.skin_data?.promo_label?.promotion_price,
         hidden_promotion_price: item?.deep_discount_skin?.skin_data?.promo_label?.hidden_promotion_price,
         start_time: formatDate(item?.deep_discount_skin?.skin_data?.promo_label?.start_time),
         end_time: formatDate(item?.deep_discount_skin?.skin_data?.promo_label?.end_time)
-      }
-    })
+      },
+      { ignoreDuplicates: true }
+    )
   }
 }
 
-const insertBatchList = async () => {
-  batch_list?.data?.banners[1]?.banners?.map(async (item: any) => {
-    await db.BatchList.create({
+const insertBatchList = () => {
+  batch_list?.data?.banners[1]?.banners?.map((item: any) => {
+    db.BatchList.create({
       banner_image: item?.banner_image,
       title: JSON.parse(item.navigate_params.navbar.title).default,
       end: formatDate(item?.end),
@@ -285,9 +272,9 @@ const insertBatchList = async () => {
   })
 }
 
-const insertNotify = async () => {
-  notify?.map(async (item: any) => {
-    await db.Notification.create({
+const insertNotify = () => {
+  notify?.map((item: any) => {
+    db.Notification.create({
       userid: item?.userid,
       seen: item?.seen,
       image: item?.image,
@@ -298,18 +285,18 @@ const insertNotify = async () => {
   })
 }
 
-const insertSearchSuggestion = async () => {
-  search_suggestion?.map(async (item: any) => {
-    await db.SearchSuggestion.create({
+const insertSearchSuggestion = () => {
+  search_suggestion?.map((item: any) => {
+    db.SearchSuggestion.create({
       text: item?.text,
       count: item?.count
     })
   })
 }
 
-const insertShopMall = async () => {
-  shopMall?.data?.shops?.map(async (item: any) => {
-    await db.ShopMall.findOrCreate({
+const insertShopMall = () => {
+  shopMall?.data?.shops?.map((item: any) => {
+    db.ShopMall.findOrCreate({
       where: { shopid: item?.shopid },
       defaults: {
         url: item?.url,
@@ -321,17 +308,17 @@ const insertShopMall = async () => {
   })
 }
 
-const insertBanner = async () => {
-  banner?.data?.space_banners[0]?.banners.map(async (item: any) => {
-    await db.Banner.create({
+const insertBanner = () => {
+  banner?.data?.space_banners[0]?.banners.map((item: any) => {
+    db.Banner.create({
       image_url: `https://cf.shopee.vn/file/${item?.image_url}`
     })
   })
 }
 
-const insertHomeCategory = async () => {
-  HomeCategory.data.category_list.map(async (item: any) => {
-    await db.HomeCategory.create({
+const insertHomeCategory = () => {
+  HomeCategory.data.category_list.map((item: any) => {
+    db.HomeCategory.create({
       catid: item?.catid,
       parent_catid: item?.parent_catid,
       name: item?.name,
@@ -341,8 +328,8 @@ const insertHomeCategory = async () => {
       selected_image: `https://cf.shopee.vn/file/${item?.selected_image}`,
       level: item?.level
     })
-    item?.children?.map(async (ele: any) => {
-      await db.HomeCategory.create({
+    item?.children?.map((ele: any) => {
+      db.HomeCategory.create({
         catid: ele?.catid,
         parent_catid: ele?.parent_catid,
         name: ele?.name,
@@ -356,9 +343,9 @@ const insertHomeCategory = async () => {
   })
 }
 
-const insertFlashSale = async () => {
-  flash_sale.data.items?.forEach(async (item: any) => {
-    await db.FlashSale.findOrCreate({
+const insertFlashSale = () => {
+  flash_sale.data.items?.forEach((item: any) => {
+    db.FlashSale.findOrCreate({
       where: { itemid: item?.itemid, shopid: item?.shopid },
       defaults: {
         itemid: item?.itemid,
@@ -386,9 +373,9 @@ const insertFlashSale = async () => {
   })
 }
 
-const insertTopProduct = async () => {
-  Top_Product?.data?.sections[0]?.data?.top_product?.forEach(async (item: any) => {
-    await db.TopProduct.create({
+const insertTopProduct = () => {
+  Top_Product?.data?.sections[0]?.data?.top_product?.forEach((item: any) => {
+    db.TopProduct.create({
       data_type: item?.data_type,
       count: item?.count,
       name: item?.name,
@@ -404,70 +391,56 @@ const insertTopProduct = async () => {
   })
 }
 
-const insertComment = async (item: any) => {
-  await db.Comment.findOrCreate({
-    where: { cmtid: item?.cmtid, orderid: item?.orderid },
-    defaults: {
+const insertComment = (item: any) => {
+  db.Comment.create(
+    {
       orderid: item?.orderid,
       itemid: item?.itemid,
       cmtid: item?.cmtid,
-      rating: item?.rating,
+      rating: item.ItemRatingReply === null ? item?.rating : null,
       userid: item?.userid,
       shopid: item?.shopid,
-      comment: item?.comment,
-      rating_star: item?.rating_star,
-      status: item?.status,
-      author_username: item?.author_username ? item?.author_username : 'người ẩn danh',
-      author_portrait: item?.author_portrait === '' ? null : `https://cf.shopee.vn/file/${item?.author_portrait}`,
+      comment: item.ItemRatingReply === null ? item?.comment : item.ItemRatingReply?.comment,
+      rating_star: item.ItemRatingReply === null ? item?.rating_star : null,
+      status: item.ItemRatingReply === null ? item?.status : null,
+      author_username: item.ItemRatingReply === null ? item?.author_username : null,
+      author_portrait:
+        item.ItemRatingReply === null ? (item?.author_portrait === '' ? null : `https://cf.shopee.vn/file/${item?.author_portrait}`) : null,
       images:
-        item?.images?.length > 0
-          ? JSON.stringify(
-              item?.images?.map((item: any) => {
-                return `https://cf.shopee.vn/file/${item}`
-              })
-            )
+        item.ItemRatingReply === null
+          ? item?.images?.length > 0
+            ? JSON.stringify(
+                item?.images?.map((item: any) => {
+                  return `https://cf.shopee.vn/file/${item}`
+                })
+              )
+            : null
           : null,
-      cover: item?.videos?.length >= 0 ? item?.videos[0]?.cover : null,
-      videos: item?.videos?.length >= 0 ? item?.videos[0]?.url : null,
-      model_name: item?.product_items[0].model_name,
-      options: item?.product_items[0]?.options?.length > 0 ? item?.product_items[0]?.options[0] : null,
-      like_count: item?.like_count ? item?.like_count : 0,
-      liked: false,
-      mtime: formatDate(item?.mtime),
-      ctime: formatDate(item?.ctime),
-      createdAt: formatDate(item?.mtime)
-    }
-  })
+      cover: item.ItemRatingReply === null ? (item?.videos?.length >= 0 ? item?.videos[0]?.cover : null) : null,
+      videos: item.ItemRatingReply === null ? (item?.videos?.length >= 0 ? item?.videos[0]?.url : null) : null,
+      model_name: item.ItemRatingReply === null ? item?.product_items[0].model_name : null,
+      options: item.ItemRatingReply === null ? (item?.product_items[0]?.options?.length > 0 ? item?.product_items[0]?.options[0] : null) : null,
+      is_replied: item.ItemRatingReply === null ? false : true,
+      level: item.ItemRatingReply === null ? 0 : 1,
+      is_shop: item.ItemRatingReply === null ? 0 : 1,
+      like_count: item.ItemRatingReply === null ? (item?.like_count ? item?.like_count : 0) : null,
+      liked: item.ItemRatingReply === null ? false : null,
+      mtime: item.ItemRatingReply === null ? formatDate(item?.mtime) : formatDate(item.ItemRatingReply.mtime),
+      ctime: item.ItemRatingReply === null ? formatDate(item?.ctime) : formatDate(item.ItemRatingReply.ctime),
+      createdAt: item.ItemRatingReply === null ? formatDate(item?.mtime) : formatDate(item.ItemRatingReply.mtime)
+    },
+    { ignoreDuplicates: true }
+  )
 }
 
-const insertItemRatingReply = async (item: any) => {
-  if (typeof item.ItemRatingReply?.orderid !== 'undefined') {
-    await db.CommentReply.findOrCreate({
-      where: { cmtid: item?.cmtid },
-      defaults: {
-        orderid: item?.orderid,
-        itemid: item?.itemid,
-        shopid: item?.shopid,
-        userid: item?.ItemRatingReply?.userid,
-        comment: item?.ItemRatingReply?.comment,
-        mtime: formatDate(item?.ItemRatingReply?.mtime),
-        ctime: formatDate(item?.ItemRatingReply?.ctime),
-        createdAt: formatDate(item?.ItemRatingReply?.mtime)
-      }
-    })
-  }
-}
-
-const insertUser = async (item: any) => {
-  const hashPassWord = (password: any) => bcrypt.hashSync(password, bcrypt.genSaltSync(12))
+const insertUser = (item: any) => {
   const sex = 0
   const img_men =
     'https://imgs.search.brave.com/NMbKJRcDath4I02VHl0t8tYf4UJSAmftuegWj3ZCbYs/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTcuanBn'
   const img_women =
     'https://imgs.search.brave.com/GgQ8DyHg0f1QxTAoZOmh4fYbylAOXHK903G1j_P_EaE/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTQuanBn'
-  await db.User.findOrCreate({
-    where: { userid: item?.data?.userid },
-    defaults: {
+  db.User.create(
+    {
       userid: item?.data?.userid,
       shopid: item?.data?.shopid,
       name: item?.data?.account?.username,
@@ -479,14 +452,14 @@ const insertUser = async (item: any) => {
       phone: 0,
       birthday: '',
       password: hashPassWord(`${item?.data?.account?.username}${item?.data?.userid}`)
-    }
-  })
+    },
+    { ignoreDuplicates: true }
+  )
 }
 
-const insertShop = async (item: any) => {
-  await db.Shop.findOrCreate({
-    where: { shopid: item?.data?.shopid },
-    defaults: {
+const insertShop = (item: any) => {
+  db.Shop.create(
+    {
       shopid: item?.data?.shopid,
       userid: item?.data?.userid,
       place: item?.data?.shop_location,
@@ -497,7 +470,6 @@ const insertShop = async (item: any) => {
       item_count: item?.data?.item_count,
       name: item?.data?.name,
       cover: item?.data?.cover === '' ? null : `https://cf.shopee.vn/file/${item?.data?.cover}`,
-
       rating_star: item?.data?.rating_star,
       rating_bad: item?.data?.rating_bad,
       rating_good: item?.data?.rating_good,
@@ -513,17 +485,20 @@ const insertShop = async (item: any) => {
       country: item?.data?.country,
       last_active_time: item?.data?.last_active_time,
       createdAt: formatDate(item?.data?.ctime)
-    }
-  })
+    },
+    { ignoreDuplicates: true }
+  )
 }
 
-const insertIndustry = async (item: any) => {
-  await db.Industry.create({
-    category_name: item?.category_name,
-    display_name: item.path[0].category_name,
-    images: JSON.stringify(item?.images),
-    path_category_name: JSON.stringify(item?.path?.map((ele: any) => ele?.category_name)),
-    path_category_id: JSON.stringify(item?.path?.map((ele: any) => ele?.category_id)),
-    catid: item?.path[0].category_id
-  })
+const insertIndustry = (item: any, index: number) => {
+  db.Industry.create(
+    {
+      catid: item?.path[index]?.category_id,
+      parent_catid: index === 0 ? null : item?.path[index - 1]?.category_id,
+      level: index,
+      category_name: item?.path[index]?.category_name,
+      images: item?.images[index]
+    },
+    { ignoreDuplicates: true }
+  )
 }

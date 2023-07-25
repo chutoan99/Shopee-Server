@@ -9,13 +9,16 @@ const CommentService = {
       const queries = { ...query }
       const response = await db.Comment.findAll({
         where: queries,
-        include: [
-          {
-            model: db.CommentReply,
-            as: 'CommentReply'
-          }
-        ]
+        include: {
+          model: db.CommentReply,
+          as: 'commentReply'
+        }
       })
+      console.log(response.length, 'response')
+      const respons2 = await db.CommentReply.findOne({
+        where: { cmtrepid: response[0].cmtrepid }
+      })
+      console.log(respons2, 'respons2')
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get Comment.',
@@ -27,13 +30,16 @@ const CommentService = {
   },
 
   GetCommentId: async (cmtid: any) => {
+    console.log(cmtid, 'cmtid')
     try {
       const response = await db.Comment.findOne({
         where: { cmtid: cmtid },
+        raw: true,
+        nest: true,
         include: [
           {
             model: db.CommentReply,
-            as: 'CommentReply'
+            as: 'commentReply'
           }
         ]
       })
