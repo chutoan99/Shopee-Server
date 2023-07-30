@@ -24,7 +24,6 @@ const GetAllIndustryService = {
       const response = await db.Industry.findAll({
         where: { category_name: category_name }
       })
-      console.log(response, response)
       const catid = response[0].catid
       const queries: any = {}
       const offset = page && page > 0 ? (page - 1) * limit : 0

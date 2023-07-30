@@ -10,9 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.Attribute, { foreignKey: 'attributeid', targetKey: 'attributeid', as: 'attributes' })
       Post.belongsTo(models.Shop, { foreignKey: 'shopid', targetKey: 'shopid', as: 'shop_info' })
       Post.belongsTo(models.DeepDiscountSkin, { foreignKey: 'discountid', targetKey: 'discountid', as: 'deep_discount_skin' })
-      Post.hasOne(models.Cart, { foreignKey: 'itemid', as: 'overview' })
       Post.hasOne(models.Like, { foreignKey: 'itemid', as: 'likeDetail' })
-      Post.hasOne(models.Order, { foreignKey: 'itemid', as: 'orderDetail' })
+      Post.hasOne(models.Cart, { foreignKey: 'itemid', as: 'overview' })
     }
   }
   Post.init(

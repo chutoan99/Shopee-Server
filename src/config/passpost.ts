@@ -12,8 +12,6 @@ passport.use(
     },
     async (accessToken: string, refreshToken: string, profile: GoogleProfile, cb: (error: any, user?: any) => void) => {
       try {
-        console.log(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET)
-        console.log(profile, 'profile')
         const [user, created] = await db.User.findOrCreate({ where: { googleId: profile.id } })
         return cb(null, user)
       } catch (error) {
@@ -30,8 +28,6 @@ passport.use(
       callbackURL: `${process.env.URL_BACKEND}/api/client/auth/facebook/callback`
     },
     async (accessToken: string, refreshToken: string, profile: FacebookProfile, cb: (error: any, user?: any) => void) => {
-      console.log(process.env.FACEBOOK_APP_ID, process.env.FACEBOOK_APP_ID)
-      console.log(profile, 'profile')
       try {
         const [user, created] = await db.User.findOrCreate({ where: { facebookId: profile.id } })
         return cb(null, user)

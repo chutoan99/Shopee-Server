@@ -19,14 +19,13 @@ const AuthService = {
           userid: generateUserid(),
           shopid: generateShopid(),
           password: hashPassWord(payload?.password),
-          avatar:
-            'https://imgs.search.brave.com/NMbKJRcDath4I02VHl0t8tYf4UJSAmftuegWj3ZCbYs/rs:fit:640:403:1/g:ce/aHR0cDovL3d3dy5i/aXRyZWJlbHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDEx/LzA0L0ZhY2Vib29r/LU5ldy1EZWZhdWx0/LUF2YXRhci1QaWN0/dXJlLTcuanBn',
+          avatar: '',
           sex: 0,
           role: 'client',
           name: payload?.name,
           address: payload?.address,
-          birthday: payload?.birthday,
-          phone: payload?.phone
+          birthday: Math.floor(new Date().getTime() / 1000),
+          phone: 0
         }
       })
       return {
@@ -47,7 +46,10 @@ const AuthService = {
         where: {
           email
         },
-        raw: true
+        raw: true,
+        attributes: {
+          exclude: ['id', 'createdAt', 'updatedAt']
+        }
       })
       if (response && bcrypt.compareSync(password, response.password)) {
         const accessToken = generateAccessToken({
@@ -61,7 +63,10 @@ const AuthService = {
           email: response.email
         })
 
-        await db.User.update({ refreshToken: newRefreshToken }, { where: { email }, attributes: { exclude: ['password', 'refreshToken'] } })
+        await db.User.update(
+          { refreshToken: newRefreshToken, not_new_user: response.not_new_user === null ? true : false },
+          { where: { email }, attributes: { exclude: ['password', 'refreshToken'] } }
+        )
         return {
           err: 0,
           msg: 'Login Success',
@@ -89,7 +94,9 @@ const AuthService = {
   // Change password
   ForgotPassword: async (email: any) => {
     try {
-      const user = await db.User.findOne({ where: { email: email } })
+      const user = await db.User.findOne({
+        where: { email: email }
+      })
       if (!user) {
         return {
           err: -1,

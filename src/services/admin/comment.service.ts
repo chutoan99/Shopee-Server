@@ -32,13 +32,7 @@ const CommentService = {
       })
       const response = await db.Comment.findAll({
         where: { ...query },
-        ...queries,
-        include: [
-          {
-            model: db.CommentReply,
-            as: 'CommentReply'
-          }
-        ]
+        ...queries
       })
       const lengthResponse = response.length
       for (let i = 0; i < lengthResponse; i++) {

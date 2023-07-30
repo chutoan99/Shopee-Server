@@ -5,7 +5,8 @@ module.exports = {
     await queryInterface.createTable('Orders', {
       orderid: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
       userid: { type: Sequelize.STRING },
-      shopid: { type: Sequelize.BIGINT },
+      shopid: { type: Sequelize.INTEGER },
+      shop_name: { type: Sequelize.STRING },
       type: { type: Sequelize.INTEGER },
       state: { type: Sequelize.STRING },
       total_num_items: { type: Sequelize.INTEGER },

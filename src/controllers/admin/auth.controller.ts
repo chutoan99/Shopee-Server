@@ -9,7 +9,6 @@ interface LoginResponse {
 
 const AuthController = {
   Login: (req: Request, res: Response) => {
-    console.log('xhutoa')
     try {
       const { email, password } = req.body
       if (!email || !password) {

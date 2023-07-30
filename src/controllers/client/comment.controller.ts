@@ -2,14 +2,15 @@ import CommentService from '../../services/client/comment.service'
 import { internalServerError } from '../../middleWares/handle_errors'
 import { Request, Response } from 'express'
 
-const CommentClientController = {
+const CommentController = {
   GetAllComment: async (req: Request, res: Response) => {
-    const query = req.query
     try {
-      const response = await CommentService.GetAllComment(query)
-      return res.status(200).json(response)
+      const query = req.query
+      CommentService.GetAllComment({ ...query }).then((response: any) => {
+        res.status(200).json(response)
+      })
     } catch (error) {
-      return internalServerError(res)
+      internalServerError(res)
     }
   },
 
@@ -35,7 +36,6 @@ const CommentClientController = {
 
   DeleteCommentId: async (req: Request, res: Response) => {
     const { cmtid } = req.params
-    console.log(cmtid)
     try {
       const response = await CommentService.DeleteCommentId(cmtid)
       return res.status(200).json(response)
@@ -56,4 +56,4 @@ const CommentClientController = {
   }
 }
 
-export default CommentClientController
+export default CommentController

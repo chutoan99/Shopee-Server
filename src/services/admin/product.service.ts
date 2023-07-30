@@ -174,7 +174,6 @@ const ProductService = {
       if (fileData) {
         payload.image = fileData.path
       }
-      console.log(fileData, 'fileData')
       const response = await db.Post.update(
         {
           name: payload?.name,

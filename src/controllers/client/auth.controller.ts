@@ -76,8 +76,6 @@ const AuthClientController = {
   logout: async (req: any, res: Response) => {
     try {
       const cookie = req.cookies
-      console.log('cookiecookie')
-      console.log(cookie, 'cookiecookie')
       if (!cookie || !cookie.refreshToken) throw new Error('No refresh token in cookies')
       const response = await AuthService.Logout(cookie)
       res.clearCookie('refreshToken', {

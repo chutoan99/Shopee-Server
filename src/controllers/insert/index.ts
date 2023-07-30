@@ -1,5 +1,6 @@
 const db = require('../../models/index')
 import bcrypt from 'bcrypt'
+import { generateCmtid } from '~/utils/gennerateNumber'
 const datas = require('../../../../data/data')
 const HomeCategory = require('../../../../data/category_tree.json')
 const banner = require('../../../../data/banner.json')
@@ -394,43 +395,73 @@ const insertTopProduct = () => {
 const insertComment = (item: any) => {
   db.Comment.create(
     {
+      cmtid: item.cmtid,
       orderid: item?.orderid,
       itemid: item?.itemid,
-      cmtid: item?.cmtid,
-      rating: item.ItemRatingReply === null ? item?.rating : null,
+      rating: item?.rating,
       userid: item?.userid,
       shopid: item?.shopid,
-      comment: item.ItemRatingReply === null ? item?.comment : item.ItemRatingReply?.comment,
-      rating_star: item.ItemRatingReply === null ? item?.rating_star : null,
-      status: item.ItemRatingReply === null ? item?.status : null,
-      author_username: item.ItemRatingReply === null ? item?.author_username : null,
-      author_portrait:
-        item.ItemRatingReply === null ? (item?.author_portrait === '' ? null : `https://cf.shopee.vn/file/${item?.author_portrait}`) : null,
+      parent_cmtid: null,
+      comment: item?.comment,
+      rating_star: item?.rating_star,
+      status: item?.status,
+      author_username: item?.author_username,
+      author_portrait: item?.author_portrait === '' ? null : `https://cf.shopee.vn/file/${item?.author_portrait}`,
       images:
-        item.ItemRatingReply === null
-          ? item?.images?.length > 0
-            ? JSON.stringify(
-                item?.images?.map((item: any) => {
-                  return `https://cf.shopee.vn/file/${item}`
-                })
-              )
-            : null
+        item?.images?.length > 0
+          ? JSON.stringify(
+              item?.images?.map((item: any) => {
+                return `https://cf.shopee.vn/file/${item}`
+              })
+            )
           : null,
-      cover: item.ItemRatingReply === null ? (item?.videos?.length >= 0 ? item?.videos[0]?.cover : null) : null,
-      videos: item.ItemRatingReply === null ? (item?.videos?.length >= 0 ? item?.videos[0]?.url : null) : null,
-      model_name: item.ItemRatingReply === null ? item?.product_items[0].model_name : null,
-      options: item.ItemRatingReply === null ? (item?.product_items[0]?.options?.length > 0 ? item?.product_items[0]?.options[0] : null) : null,
+      cover: item?.videos?.length >= 0 ? item?.videos[0]?.cover : null,
+      videos: item?.videos?.length >= 0 ? item?.videos[0]?.url : null,
+      model_name: item?.product_items[0].model_name,
+      options: item?.product_items[0]?.options?.length > 0 ? item?.product_items[0]?.options[0] : null,
       is_replied: item.ItemRatingReply === null ? false : true,
-      level: item.ItemRatingReply === null ? 0 : 1,
+      level: 0,
       is_shop: item.ItemRatingReply === null ? 0 : 1,
-      like_count: item.ItemRatingReply === null ? (item?.like_count ? item?.like_count : 0) : null,
-      liked: item.ItemRatingReply === null ? false : null,
-      mtime: item.ItemRatingReply === null ? formatDate(item?.mtime) : formatDate(item.ItemRatingReply.mtime),
-      ctime: item.ItemRatingReply === null ? formatDate(item?.ctime) : formatDate(item.ItemRatingReply.ctime),
-      createdAt: item.ItemRatingReply === null ? formatDate(item?.mtime) : formatDate(item.ItemRatingReply.mtime)
+      like_count: item?.like_count ? item?.like_count : 0,
+      liked: false,
+      mtime: formatDate(item?.mtime),
+      ctime: formatDate(item?.ctime),
+      createdAt: formatDate(item?.mtime)
     },
     { ignoreDuplicates: true }
   )
+  if (item.ItemRatingReply !== null) {
+    db.Comment.create(
+      {
+        cmtid: item.cmtid + item?.userid,
+        orderid: item?.orderid,
+        itemid: item?.itemid,
+        rating: null,
+        userid: item?.userid,
+        shopid: item?.shopid,
+        parent_cmtid: item.cmtid,
+        comment: item.ItemRatingReply?.comment,
+        rating_star: null,
+        status: null,
+        author_username: null,
+        author_portrait: null,
+        images: null,
+        cover: null,
+        videos: null,
+        model_name: null,
+        options: null,
+        is_replied: true,
+        level: 1,
+        is_shop: 1,
+        like_count: null,
+        liked: null,
+        mtime: formatDate(item.ItemRatingReply.mtime),
+        ctime: formatDate(item.ItemRatingReply.ctime),
+        createdAt: formatDate(item.ItemRatingReply.mtime)
+      },
+      { ignoreDuplicates: true }
+    )
+  }
 }
 
 const insertUser = (item: any) => {

@@ -12,7 +12,6 @@ const sendEmail = async (email: any, html: any) => {
       pass: process.env.PASS_EMAIL
     }
   })
-  console.log(transporter, 'transporter')
   const mainOptions: any = {
     from: process.env.USER_EMAIL,
     to: `${email}`,
@@ -20,7 +19,6 @@ const sendEmail = async (email: any, html: any) => {
     text: 'You recieved message from ' + email,
     html: html
   }
-  console.log(mainOptions, 'mainOptions')
   const info = await transporter.sendMail(mainOptions)
   return info
 }

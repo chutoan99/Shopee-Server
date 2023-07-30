@@ -6,7 +6,9 @@ const UserService = {
     try {
       const response = await db.User.findOne({
         where: { userid: userid },
-        attributes: { exclude: ['password'] }
+        attributes: {
+          exclude: ['id', 'createdAt', 'updatedAt', 'password']
+        }
       })
       return {
         err: response ? 0 : 1,
@@ -25,12 +27,12 @@ const UserService = {
       }
       const response = await db.User.update(
         {
-          sex: payload?.sex,
+          sex: +payload?.sex,
           email: payload?.email,
           name: payload?.name,
           address: payload?.address,
-          phone: payload?.phone,
-          birthday: payload?.birthday,
+          phone: +payload?.phone,
+          birthday: +payload?.birthday,
           avatar: payload.avatar
         },
         { where: { userid: userid } }

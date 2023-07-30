@@ -1,12 +1,16 @@
 import express from 'express'
-import CommentClientController from '../../controllers/client/comment.controller'
+import CommentController from '../../controllers/client/comment.controller'
 
 const router = express.Router()
 
-router.get('', CommentClientController.GetAllComment)
-router.post('', CommentClientController.AddCommentId)
-router.get('/:cmtid', CommentClientController.GetCommentId)
-router.put('/:cmtid', CommentClientController.UpdateCommentId)
-router.delete('/:cmtid', CommentClientController.DeleteCommentId)
+router.get('', CommentController.GetAllComment)
+
+router.post('', CommentController.AddCommentId)
+
+router.get('/:cmtid', CommentController.GetCommentId)
+
+router.put('/:cmtid', CommentController.UpdateCommentId)
+
+router.delete('/:cmtid', CommentController.DeleteCommentId)
 
 export default router

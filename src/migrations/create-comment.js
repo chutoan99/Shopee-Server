@@ -4,6 +4,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Comments', {
       cmtid: { type: Sequelize.BIGINT, primaryKey: true, allowNull: false },
+      parent_cmtid: { type: Sequelize.BIGINT },
       userid: { type: Sequelize.STRING },
       orderid: { type: Sequelize.BIGINT },
       itemid: { type: Sequelize.BIGINT },
@@ -23,10 +24,10 @@ module.exports = {
       options: { type: Sequelize.TEXT },
       is_replied: { type: Sequelize.BOOLEAN },
       like_count: { type: Sequelize.INTEGER },
-      id: { type: Sequelize.INTEGER },
       liked: { type: Sequelize.BOOLEAN },
       mtime: { type: Sequelize.DATE },
       ctime: { type: Sequelize.DATE },
+      id: { type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

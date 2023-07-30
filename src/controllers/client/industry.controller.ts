@@ -13,7 +13,6 @@ const IndustryController = {
   },
   GetAllCategory: async (req: Request, res: Response) => {
     try {
-      console.log('chutoan')
       const { page, limit, category_name } = req.query
 
       const response = await GetAllIndustryService.GetAllIndustryWithCategory({

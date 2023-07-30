@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      sex: DataTypes.STRING,
+      sex: DataTypes.INTEGER,
       role: DataTypes.STRING,
       userid: DataTypes.STRING,
       shopid: DataTypes.BIGINT,
@@ -16,10 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       name: DataTypes.STRING,
       address: DataTypes.STRING,
-      birthday: DataTypes.STRING,
+      birthday: DataTypes.INTEGER,
       phone: DataTypes.BIGINT,
       avatar: DataTypes.STRING,
       filename: DataTypes.STRING,
+      not_new_user: DataTypes.BOOLEAN,
       refreshToken: DataTypes.STRING,
       passwordResetToken: DataTypes.STRING,
       passwordResetExpires: DataTypes.STRING,

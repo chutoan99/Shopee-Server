@@ -1,17 +1,42 @@
 const db = require('../../models/index')
 
 const ShopService = {
-  GetAllShop: async (query: any) => {
+  GetItems: async (shopid: any) => {
     try {
-      const queries = { ...query }
-      const response = await db.Shop.findAll({ where: queries })
+      const response = await db.Post.findAll({
+        where: { shopid: shopid },
+        attributes: [
+          'itemid',
+          'shopid',
+          'catid',
+          'name',
+          'image',
+          'historical_sold',
+          'price',
+          'price_min',
+          'stock',
+          'price_max',
+          'price_min_before_discount',
+          'price_max_before_discount',
+          'discount',
+          'shop_rating',
+          'filename',
+          'shop_name',
+          'liked',
+          'ctime',
+          'show_free_shipping',
+          'is_official_shop',
+          'is_service_by_shopee'
+        ]
+      })
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get shop.',
+        msg: response ? 'OK' : 'Failed to get item shop',
+        total: response.length,
         response
       }
     } catch (error) {
-      throw new Error('Failed to get shop.')
+      throw new Error('Failed to get shop Id.')
     }
   },
 
@@ -25,75 +50,6 @@ const ShopService = {
       }
     } catch (error) {
       throw new Error('Failed to get shop Id.')
-    }
-  },
-
-  UpdateShop: async (shopid: any, payload: any) => {
-    try {
-      const response = await db.Shop.update(
-        {
-          is_official_shop: payload?.is_official_shop,
-          item_count: payload?.item_count,
-          rating_star: payload?.rating_star,
-          name: payload?.name,
-          shop_location: payload?.shop_location,
-          username: payload?.username,
-          portrait: payload?.portrait,
-          place: payload?.place,
-          description: payload.description
-        },
-        { where: { shopid: shopid } }
-      )
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to update shop.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to update shop.')
-    }
-  },
-
-  AddShop: async (payload: any) => {
-    try {
-      const response = await db.Shop.create({
-        shopid: payload?.shopid,
-        userid: payload?.userid,
-        is_official_shop: payload?.is_official_shop,
-        item_count: payload?.item_count,
-        rating_star: payload?.rating_star,
-        name: payload?.name,
-        follower_count: payload?.follower_count,
-        rating_bad: payload?.rating_bad,
-        rating_good: payload?.rating_good,
-        rating_normal: payload?.rating_normal,
-        status: payload?.status,
-        shop_location: payload?.shop_location,
-        username: payload?.username,
-        portrait: payload?.portrait,
-        place: payload?.place,
-        response_time: payload?.response_time
-      })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to ADD shop.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to ADD shop.')
-    }
-  },
-
-  DeleteShop: async (shopid: any) => {
-    try {
-      const response = await db.Shop.destroy({ where: { shopid: shopid } })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to delete shop.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to delete shop.')
     }
   }
 }

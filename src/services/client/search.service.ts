@@ -23,7 +23,6 @@ const SearchService = {
 
   AddSearch: async (payload: any, userid: string) => {
     try {
-      console.log(userid, 'userid', payload, '"payload"')
       const response = await db.Search.create({
         userid: userid,
         text: payload.text
