@@ -5,12 +5,12 @@
     "title": "SHOPEE API DOCUMENT",
     "description": "SHOPEE API DOCUMENT",
     "license": {
-      "name": "ChuToan - Website,  Send email to Truongvanchutoan199@gmail.com",
+      "name": "ChuToan - Website,  Send email to Truongvanchutoan1999@gmail.com",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
 
-  "host": "localhost:8000",
+  "host": "https://server-shopee3.onrender.com",
   "basePath": "/api/client",
   "tags": [
     { "name": "Auth", "description": "User authentication and authorization functionality." },
@@ -33,7 +33,7 @@
     { "name": "TopProduct", "description": "Top or popular product management" }
   ],
 
-  "schemes": ["http"],
+  "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "securityDefinitions": {
@@ -59,13 +59,8 @@
             "schema": {
               "required": ["name", "photoUrls"],
               "properties": {
-                "sex": { "type": "number" },
-                "phone": { "type": "number" },
-                "address": { "type": "string" },
-                "birthday": { "type": "string" },
-                "avatar": { "type": "string" },
                 "name": { "type": "string" },
-                "email": { "type": "string" },
+                "email": { "type": "string", "format": "email" },
                 "password": { "type": "string" }
               }
             }
@@ -120,7 +115,7 @@
             "schema": {
               "required": ["name", "photoUrls"],
               "properties": {
-                "email": { "type": "string" },
+                "email": { "type": "string", "format": "email" },
                 "password": { "type": "string" }
               }
             }
@@ -162,16 +157,27 @@
     },
 
     "/auth/forgotPassword": {
-      "get": {
+      "post": {
         "tags": ["Auth"],
         "summary": "Forgot password",
         "description": "Initiates the password recovery process for a user.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that contains the login credentials",
+            "required": false,
+            "schema": {
+              "required": ["name", "photoUrls"],
+              "properties": {
+                "email": { "type": "string", "format": "email" }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
+            "description": "Success"
           },
           "400": {
             "description": "Bad Request",
@@ -206,12 +212,25 @@
         "tags": ["Auth"],
         "summary": "Reset password",
         "description": "Resets the password for a user.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that contains the login credentials",
+            "required": false,
+            "schema": {
+              "required": ["name", "photoUrls"],
+              "properties": {
+                "email": { "type": "string", "format": "email" },
+                "password": { "type": "string" },
+                "token": { "type": "string" }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
+            "description": "Success"
           },
           "400": {
             "description": "Bad Request",
@@ -454,7 +473,6 @@
             "in": "formData",
             "name": "avatar",
             "description": "Avatar file",
-            "required": true,
             "type": "file"
           },
           {
@@ -2561,7 +2579,6 @@
 
     "User": {
       "properties": {
-        "id": { "type": "number" },
         "sex": { "type": "string" },
         "userid": { "type": "string" },
         "shopid": { "type": "number" },
@@ -2569,7 +2586,7 @@
         "email": { "type": "string" },
         "name": { "type": "string" },
         "address": { "type": "string" },
-        "birthday": { "type": "string" },
+        "birthday": { "type": "string", "format": "date-time" },
         "phone": { "type": "number" },
         "avatar": { "type": "string" },
         "role": { "type": "string" },

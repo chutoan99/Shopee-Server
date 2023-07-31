@@ -62,10 +62,10 @@ const initRoutes = (app: Express) => {
   app.use('/api/admin/auth', AuthRoute)
   app.use('/api/admin/userInfo', UserProfileRoute)
   //? INSERT
-  app.use('/api/insert', InsertRoute)
+  // app.use('/api/insert', InsertRoute)
   //? CRAWL
   // app.use('/api/crawl', CrawlRoute)
-  // Middleware for /api-docs-admin , /api-docs-client
+  //? Middleware for /api-docs-admin , /api-docs-client
 
   app.use('/api/client/docs', serveSwaggerClient, swaggerUi.setup(swaggerClientDocument))
   app.use('/api/admin/docs', serveSwaggerAdmin, swaggerUi.setup(swaggerAdminDocument))
