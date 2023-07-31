@@ -33,7 +33,7 @@ const templateResetPassword = (email: string, resetToken: string) => {
                         </tr>
                         <tr>
                            <td style="height:40px;"> 
-                            <a href=${process.env.URL_FRONTEND}/resetPassword/${email}/${resetToken}
+                            <a href=${process.env.URL_BACKEND}/resetPassword/${email}/${resetToken}
                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                         Password</a></td>
                         </tr>
