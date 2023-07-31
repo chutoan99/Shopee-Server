@@ -185,21 +185,29 @@ const OrderService = {
 
   GetOrder: async (userid: any, orderid: any) => {
     try {
-      const response = await db.Order.findOne({
-        where: { userid: userid, orderid: orderid },
-        include: [
-          {
-            model: db.User,
-            as: 'user',
-            attributes: {
-              exclude: ['id', 'createdAt', 'updatedAt']
-            }
-          }
-        ],
+      const userResponse = await db.User.findOne({
+        where: { userid: userid },
         attributes: {
-          exclude: ['id', 'createdAt', 'updatedAt']
+          exclude: [
+            'id',
+            'createdAt',
+            'updatedAt',
+            'refreshToken',
+            'passwordResetToken',
+            'passwordResetExpires',
+            'passwordChangedAt',
+            'password'
+          ]
         }
       })
+
+      const response = await db.Order.findOne({
+        where: { userid: userid, orderid: orderid },
+        attributes: {
+          exclude: ['id', 'updatedAt']
+        }
+      })
+
       const postPromises = JSON.parse(response.item_groups_id).map(async (itemid: any) => {
         const data = await db.Post.findOne({
           where: { itemid: itemid },
@@ -234,6 +242,7 @@ const OrderService = {
         ...response.dataValues,
         option: JSON.parse(response.option),
         amount: JSON.parse(response.amount),
+        user: userResponse,
         item_groups_id: JSON.parse(response.item_groups_id),
         posts: allPosts
       }
@@ -243,6 +252,7 @@ const OrderService = {
         response: newOrder
       }
     } catch (error) {
+      console.log(error, 'error')
       throw new Error('Failed to get all Orders of the user.')
     }
   },

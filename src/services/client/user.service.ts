@@ -7,7 +7,7 @@ const UserService = {
       const response = await db.User.findOne({
         where: { userid: userid },
         attributes: {
-          exclude: ['id', 'createdAt', 'updatedAt', 'password']
+          exclude: ['id', 'updatedAt', 'password']
         }
       })
       return {
@@ -20,11 +20,8 @@ const UserService = {
     }
   },
 
-  UpdateUser: async (userid: any, payload: any, fileData: any) => {
+  UpdateUser: async (userid: any, payload: any) => {
     try {
-      if (fileData) {
-        payload.avatar = fileData.path
-      }
       const response = await db.User.update(
         {
           sex: +payload?.sex,
@@ -32,18 +29,17 @@ const UserService = {
           name: payload?.name,
           address: payload?.address,
           phone: +payload?.phone,
-          birthday: +payload?.birthday,
+          birthday: payload?.birthday,
           avatar: payload.avatar
         },
         { where: { userid: userid } }
       )
+
       return {
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to  User.'
       }
-      if (fileData && !response) cloudinary.uploader.destroy(fileData.filename)
     } catch (error) {
-      if (fileData) cloudinary.uploader.destroy(fileData.filename)
       throw new Error('Failed to Update User')
     }
   }

@@ -10,7 +10,7 @@ module.exports = {
       email: { type: Sequelize.STRING },
       name: { type: Sequelize.STRING },
       address: { type: Sequelize.STRING },
-      birthday: { type: Sequelize.INTEGER },
+      birthday: { type: Sequelize.DATE },
       phone: { type: Sequelize.BIGINT },
       not_new_user: { type: Sequelize.BOOLEAN },
       avatar: { type: Sequelize.STRING },

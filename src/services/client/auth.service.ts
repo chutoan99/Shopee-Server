@@ -19,13 +19,10 @@ const AuthService = {
           userid: generateUserid(),
           shopid: generateShopid(),
           password: hashPassWord(payload?.password),
-          avatar: '',
           sex: 0,
           role: 'client',
           name: payload?.name,
-          address: payload?.address,
-          birthday: Math.floor(new Date().getTime() / 1000),
-          phone: 0
+          address: payload?.address
         }
       })
       return {

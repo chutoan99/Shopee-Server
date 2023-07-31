@@ -1,6 +1,5 @@
 const db = require('../../models/index')
 import bcrypt from 'bcrypt'
-import { generateCmtid } from '~/utils/gennerateNumber'
 const datas = require('../../../../data/data')
 const HomeCategory = require('../../../../data/category_tree.json')
 const banner = require('../../../../data/banner.json')

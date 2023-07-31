@@ -839,6 +839,104 @@
         }
       }
     },
+    "/comment": {
+      "get": {
+        "tags": ["Comment"],
+        "summary": "Get all Comment in system",
+        "parameters": [
+          {
+            "name": "itemid",
+            "in": "query",
+            "required": true,
+            "description": "ID of the item",
+            "type": "string"
+          },
+          {
+            "name": "shopid",
+            "in": "query",
+            "required": true,
+            "description": "ID of the shop",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Comment"],
+        "description": "Create new Comment in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Product_Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response_400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Response_401"
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/Response_404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response_500"
+            }
+          }
+        }
+      }
+    },
 
     "/like": {
       "post": {
@@ -1214,225 +1312,6 @@
             "description": "success",
             "schema": {
               "$ref": "#/definitions/HomeCategory_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/comment": {
-      "get": {
-        "tags": ["Comment"],
-        "summary": "Get all Comment in system",
-        "parameters": [
-          {
-            "name": "itemid",
-            "in": "query",
-            "required": true,
-            "description": "ID of the item",
-            "type": "string"
-          },
-          {
-            "name": "shopid",
-            "in": "query",
-            "required": true,
-            "description": "ID of the shop",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Comment"],
-        "description": "Create new Comment in system",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User that we want to create"
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      }
-    },
-
-    "/comment/{cmtid}": {
-      "parameters": [
-        {
-          "name": "cmtid",
-          "in": "path",
-          "required": true,
-          "description": "ID of cmtid that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Comment"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Comment"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Response_400"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Response_401"
-            }
-          },
-          "404": {
-            "description": "not found",
-            "schema": {
-              "$ref": "#/definitions/Response_404"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Response_500"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Comment"],
-        "summary": "Get Comment with given ID",
-        "responses": {
-          "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Product_Response"
             }
           },
           "400": {

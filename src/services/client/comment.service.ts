@@ -3,7 +3,7 @@ import { Op } from 'sequelize'
 import { generateCmtid } from '../../utils/gennerateNumber'
 import { formatCommentsResponse } from '~/utils/formatComment'
 require('dotenv').config()
-
+const cloudinary = require('cloudinary').v2
 interface GetAllCommentOptions {
   page?: number
   limit?: number
@@ -80,78 +80,54 @@ const CommentService = {
         response: response.count ? formatCommentsResponse(listComment) : []
       }
     } catch (error) {
-      console.log(error, 'error')
-      throw new Error(`Failed to gets comments`)
+      throw new Error(`Failed to gets comments: ${error}`)
     }
   },
 
-  GetCommentId: async (cmtid: any) => {
-    console.log(cmtid, 'cmtid')
+  CreateComment: async (userid: any, payload: any, filesdata: any) => {
     try {
-      const response = await db.Comment.findOne({
-        where: { cmtid: cmtid },
-        raw: true,
-        nest: true
+      const imageUrls: any = []
+      const uniqueFiles = new Set(filesdata) // Convert to a set to remove duplicates
+
+      await Promise.all(
+        Array.from(uniqueFiles).map(async (file: any) => {
+          console.log(file, 'file')
+          const result = await cloudinary.uploader.upload(file.path)
+          imageUrls.push(result.secure_url)
+        })
+      )
+      const user = await db.User.findOne({
+        where: { userid: userid }
       })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get Comment id.',
-        response
+      if (!user) {
+        throw new Error('User not found.')
       }
-    } catch (error) {
-      throw new Error('Failed to get Comment id.')
-    }
-  },
-
-  AddCommentId: async (payload: any) => {
-    try {
       const response = await db.Comment.create({
+        cmtid: generateCmtid(),
         orderid: payload?.orderid,
         itemid: payload?.itemid,
-        cmtid: generateCmtid(),
-        rating: payload?.rating,
-        userid: payload?.userid,
+        userid: user?.userid,
         shopid: payload?.shopid,
         comment: payload?.comment,
         rating_star: payload?.rating_star,
-        status: payload?.status,
-        author_username: payload?.author_username,
-        images: payload?.images,
-        videos: payload?.videos
+        author_username: user?.name,
+        author_portrait: user?.avatar,
+        images: JSON.stringify(imageUrls),
+        model_name: payload?.model_name,
+        options: payload?.option,
+        level: 0,
+        is_shop: false,
+        like_count: 0,
+        liked: false
       })
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to add Comment.',
-        response
+        msg: response ? 'OK' : 'Failed to create comments:',
+        response: response ? response : null
       }
     } catch (error) {
-      throw new Error('Failed to add Comment.')
-    }
-  },
-
-  DeleteCommentId: async (cmtid: any) => {
-    try {
-      const response = await db.Comment.destroy({ where: { cmtid: cmtid } })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to delete Comment.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to delete Comment.')
-    }
-  },
-
-  UpdateCommentId: async (cmtid: any, payload: any) => {
-    try {
-      const response = await db.Comment.update({ rating_star: payload?.rating_star, comment: payload?.comment }, { where: { cmtid: cmtid } })
-      return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to update Comment.',
-        response
-      }
-    } catch (error) {
-      throw new Error('Failed to update Comment.')
+      console.log(error, 'error')
+      throw new Error(`Failed to create comments: `)
     }
   }
 }

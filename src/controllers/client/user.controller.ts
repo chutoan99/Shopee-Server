@@ -17,21 +17,31 @@ const UserController = {
   },
 
   UpdateUser: async (req: any, res: Response) => {
+    const fileData = req.file
+    const { userid } = req.user
     try {
-      const fileData = req.file
-      const payload = req.body
-      const { userid } = req.user
-      const { error } = Joi.object({ image }).validate({
-        image: fileData.path
-      })
-      if (error) {
-        if (fileData) cloudinary.uploader.destroy(fileData.filename)
-        return badRequest(error.details[0].message, res)
+      let payload
+      if (fileData) {
+        const { error } = Joi.object({ image }).validate({
+          image: fileData.path
+        })
+        if (error) {
+          if (fileData) cloudinary.uploader.destroy(fileData.filename)
+          return badRequest(error.details[0].message, res)
+        }
+        payload = {
+          ...req.body,
+          avatar: fileData.path
+        }
+      } else {
+        payload = req.body
       }
-      UserService.UpdateUser(userid, payload, fileData).then((response: any) => {
+      console.log(payload, 'payload')
+      UserService.UpdateUser(userid, payload).then((response: any) => {
         res.status(200).json(response)
       })
     } catch (error) {
+      if (fileData) cloudinary.uploader.destroy(fileData.filename)
       internalServerError(res)
     }
   }
