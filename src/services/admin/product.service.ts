@@ -1,51 +1,55 @@
 const db = require('../../models/index')
 const cloudinary = require('cloudinary').v2
-import { Op } from 'sequelize'
 import { generateItemid } from '../../utils/gennerateNumber'
 
 const ProductService = {
-  GetAllProduct: async ({
-    page,
-    limit,
-    order,
-    name,
-    price,
-    shopid
-  }: {
-    page: any
-    limit: any
-    order: any
-    name: any
-    price: any
-    shopid: any
-  }) => {
+  GetAllProduct: async ({ page, limit, shopid }: { page?: number; limit?: number; shopid: any }) => {
     try {
       const queries: any = { raw: true, nest: true }
       const offset = !page || +page <= 1 ? 0 : +page - 1
-      const fLimit = +limit || +process.env.LIMIT! // Provide a default value if process.env.LIMIT is undefined
-      const query: any = {} // Declare and initialize the query object
-      if (order) queries.order = [order]
-      if (shopid) query.shopid = shopid
-      if (name) query.name = { [Op.substring]: name }
-      if (price) query.price = { [Op.between]: price }
-
+      const fLimit = +limit! || +process.env.LIMIT!
       queries.offset = offset * fLimit
       queries.limit = fLimit
+
       const response = await db.Post.findAndCountAll({
-        where: { ...query },
-        ...queries
+        where: { shopid: shopid },
+        ...queries,
+        order: [['createdAt', 'DESC']], // Sắp xếp theo createdAt giảm dần
+        attributes: [
+          'itemid',
+          'shopid',
+          'catid',
+          'name',
+          'image',
+          'historical_sold',
+          'price',
+          'price_min',
+          'stock',
+          'price_max',
+          'price_min_before_discount',
+          'price_max_before_discount',
+          'discount',
+          'shop_rating',
+          'filename',
+          'shop_name',
+          'liked',
+          'ctime',
+          'show_free_shipping',
+          'is_official_shop',
+          'is_service_by_shopee'
+        ]
       })
-      const total = Math.ceil(response.count / limit)
+      const total = Math.ceil(response.count / fLimit)
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'cant not found..',
+        msg: response ? 'OK' : 'cannot be found',
         page: page ? +page : 0,
-        limit: +limit ? +limit : +process.env.LIMIT!,
+        limit: +limit! ? +limit! : +process.env.LIMIT!,
         totalPage: total,
         response
       }
     } catch (error) {
-      throw new Error(`cant not found..`)
+      throw new Error('Failed to get Post')
     }
   },
 
