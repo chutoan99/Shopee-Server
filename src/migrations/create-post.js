@@ -31,6 +31,7 @@ module.exports = {
       price_min: { type: Sequelize.INTEGER },
       price_max: { type: Sequelize.INTEGER },
       historical_sold: { type: Sequelize.INTEGER },
+      price_before_discount: { type: Sequelize.INTEGER },
       price_min_before_discount: { type: Sequelize.INTEGER },
       price_max_before_discount: { type: Sequelize.INTEGER },
       shop_rating: { type: Sequelize.INTEGER },

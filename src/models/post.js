@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.INTEGER,
       price_min: DataTypes.INTEGER,
       price_max: DataTypes.INTEGER,
+      price_before_discount: DataTypes.INTEGER,
       price_min_before_discount: DataTypes.INTEGER,
       price_max_before_discount: DataTypes.INTEGER,
       description: DataTypes.STRING,
