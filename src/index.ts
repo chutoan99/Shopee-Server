@@ -1,13 +1,13 @@
 import express from 'express'
 import http from 'http'
 import cors from 'cors'
-import connectDb from './config/connectDb'
 import configSocketIO from './config/socketio'
 import initRoutes from './routes/index'
 import { Server } from 'socket.io'
 import cookieParser from 'cookie-parser'
-import { json } from 'body-parser'
 import bodyParser from 'body-parser'
+import connectMySql from './config/mysql'
+import connectMongodb from './config/mongodb'
 // Create an Express app
 const app = express()
 app.use(cors())
@@ -26,7 +26,8 @@ app.use(
 )
 
 // app
-connectDb()
+connectMySql()
+connectMongodb()
 initRoutes(app)
 // configSocketIO(app)
 // Set up Socket.IO
@@ -57,7 +58,7 @@ io.on('connection', (socket) => {
   // Event listener for 'message' event
   socket.on('message', (data) => {
     console.log('Received message:', data)
-    socket.emit('message', `You sent: ${data}`)
+    socket.emit('message', `You sent: ${data} `)
   })
 
   // Event listener for 'disconnect' event

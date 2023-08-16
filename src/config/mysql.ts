@@ -16,7 +16,7 @@ const sequelize = new Sequelize(process.env.DB_NAME!, process.env.DB_USERNAME!, 
   }
 })
 
-const connectDb = async () => {
+const connectMySql = async () => {
   try {
     await sequelize.authenticate()
     console.log('Connection to MySQL database successful.')
@@ -25,4 +25,4 @@ const connectDb = async () => {
   }
 }
 
-export default connectDb
+export default connectMySql

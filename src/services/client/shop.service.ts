@@ -16,6 +16,7 @@ const ShopService = {
           'price_min',
           'stock',
           'price_max',
+          'price_before_discount',
           'price_min_before_discount',
           'price_max_before_discount',
           'discount',

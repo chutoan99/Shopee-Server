@@ -6,6 +6,9 @@ const chatSchema = new Schema(
     id: {
       type: String
     },
+    userid: {
+      type: String
+    },
     mess: {
       type: String
     },
@@ -16,5 +19,5 @@ const chatSchema = new Schema(
   { timestamps: true }
 )
 
-const chatModel = mongoose.model('chatModel', chatSchema)
+const chatModel = mongoose.model('chat', chatSchema)
 module.exports = chatModel

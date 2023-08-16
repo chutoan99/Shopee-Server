@@ -6,7 +6,7 @@
     "host": "containers-us-west-32.railway.app",
     "dialect": "mysql",
     "port": "6917",
-    "logging": true,
+    "logging": false,
     "pool": {
       "max": 30,
       "min": 0,

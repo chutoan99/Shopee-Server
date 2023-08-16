@@ -20,4 +20,8 @@ DELETE t1 FROM `overviews` t1 INNER JOIN overviews t2 ON t1.id<t2.id AND t1.item
 
 mapbox.com
 
-swagger trên pro th2i sử dụng https
+
+
+
+
+nói lại theo ý này hay hay giúp tôi
