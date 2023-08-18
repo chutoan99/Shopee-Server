@@ -1,4 +1,7 @@
 import { Express } from 'express'
+import swaggerUi from 'swagger-ui-express'
+import swaggerClientDocument from '../config/swaggerClient.json'
+import swaggerAdminDocument from '../config/swaggerAdmin.json'
 //? CLIENT
 import IndustryRoute from './client/Industry.route'
 import BannerRoute from './client/banner.route'
@@ -17,16 +20,16 @@ import AuthClientRoute from './client/auth.route'
 import CategoryTreeRoute from './client/categoryTree.route'
 import OrderClientRoute from './client/order.route'
 import TopProductRoute from './client/topProduct.route'
-import SearchRoute from '../routes/client/search.route'
+import SearchRoute from './client/search.route'
+import RoomRoute from './client/room.route'
 //? ADMIN
 import ProductRoute from './admin/product.route'
 import CommentRoute from './admin/comment.route'
 import OrderRoute from './admin/order.route'
 import AuthRoute from './admin/auth.route'
 import UserProfileRoute from './admin/userProfile.route'
-import swaggerUi from 'swagger-ui-express'
-import swaggerClientDocument from '../config/swaggerClient.json'
-import swaggerAdminDocument from '../config/swaggerAdmin.json'
+import ShopAdminRoute from './admin/shop.route'
+import RoomAdminRoute from './admin/room.route'
 //? INSERT
 import InsertRoute from './insert/index'
 //? CRAWL
@@ -55,12 +58,16 @@ const initRoutes = (app: Express) => {
   app.use('/api/client/shopMall', shopMallRoute)
   app.use('/api/client/topProduct', TopProductRoute)
   app.use('/api/client/user', UserRoute)
+  app.use('/api/client/room', RoomRoute)
+
   //? ADMIN
   app.use('/api/admin/product', ProductRoute)
   app.use('/api/admin/comment', CommentRoute)
   app.use('/api/admin/order', OrderRoute)
   app.use('/api/admin/auth', AuthRoute)
   app.use('/api/admin/userInfo', UserProfileRoute)
+  app.use('/api/admin/shop', ShopAdminRoute)
+  app.use('/api/admin/roomAdmin', RoomAdminRoute)
   //? INSERT
   // app.use('/api/insert', InsertRoute)
   //? CRAWL

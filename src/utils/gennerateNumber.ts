@@ -19,3 +19,9 @@ export const generateCartid = () => {
 export const generateOrderid = () => {
   return +Math.floor(Math.random() * 1000000000000000)
 }
+export const generateChatid = () => {
+  return +Math.floor(Math.random() * 100000000000000000)
+}
+export const generateRoomid = (userid: any, shopid: any) => {
+  return userid + shopid
+}

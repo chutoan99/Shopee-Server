@@ -10,7 +10,7 @@
     "pool": {
       "max": 30,
       "min": 0,
-      "acquire": 600000,
+      "acquire": 6000000,
       "idle": 5000
     }
   },

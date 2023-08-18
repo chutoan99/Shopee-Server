@@ -3,18 +3,16 @@ const Schema = mongoose.Schema
 
 const chatSchema = new Schema(
   {
-    id: {
-      type: String
+    id: { type: String },
+    room_id: { type: Number },
+    content: {
+      mess: { type: String },
+      type: { type: String, default: 'mess' }
     },
-    userid: {
-      type: String
-    },
-    mess: {
-      type: String
-    },
-    avatar: {
-      type: String
-    }
+    from_id: { type: Number },
+    from_user_name: { type: String },
+    to_id: { type: Number },
+    to_user_name: { type: String }
   },
   { timestamps: true }
 )

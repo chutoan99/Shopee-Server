@@ -30,7 +30,8 @@
     { "name": "SearchSuggestion", "description": "Search suggestions for users" },
     { "name": "Shop", "description": "Shop or business information and management" },
     { "name": "ShopMall", "description": "Management of shopping malls or commercial centers" },
-    { "name": "TopProduct", "description": "Top or popular product management" }
+    { "name": "TopProduct", "description": "Top or popular product management" },
+    { "name": "Room", "description": "" }
   ],
 
   "schemes": ["https"],

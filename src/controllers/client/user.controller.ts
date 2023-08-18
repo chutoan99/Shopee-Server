@@ -36,7 +36,6 @@ const UserController = {
       } else {
         payload = req.body
       }
-      console.log(payload, 'payload')
       UserService.UpdateUser(userid, payload).then((response: any) => {
         res.status(200).json(response)
       })

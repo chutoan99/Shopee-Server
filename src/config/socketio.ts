@@ -1,25 +1,28 @@
-import http from 'http'
 import { Server } from 'socket.io'
-
-const configSocketIO = (app: any) => {
-  // Create an HTTP server using the Express app
-  const server = http.createServer(app)
-
-  // Create a Socket.IO server using the HTTP server
+import ChatService from '~/services/client/chat.server'
+const configSocketIO = (server: any) => {
   const io = new Server(server, {
     cors: { origin: '*' }
   })
 
   // Event listener for new connections
   io.on('connection', (socket) => {
-    console.log('A user connected')
-
-    // Event listener for 'message' event
-    socket.on('message', (data) => {
-      console.log('Received message:', data)
-      socket.emit('message', `You sent: ${data}`)
+    console.log(socket.id, 'socket')
+    //? Chat
+    socket.on('message', async (response: any) => {
+      if (!response?.user?.userid) return
+      try {
+        const item = await ChatService.SaveAndGetMessage(response)
+        socket.emit('message', item)
+      } catch (error) {
+        console.error('Error:', error)
+      }
     })
 
+    socket.on('room', async (roomid: number) => {
+      const chatResponse = await ChatService.GetMessage(roomid)
+      socket.emit('room', chatResponse)
+    })
     // Event listener for 'disconnect' event
     socket.on('disconnect', () => {
       console.log('A user disconnected')

@@ -2,11 +2,6 @@ import { Request, Response } from 'express'
 import { internalServerError } from '../../middleWares/handle_errors'
 import AuthService from '../../services/admin/auth.service'
 
-interface LoginResponse {
-  err: number
-  mess: string
-}
-
 const AuthController = {
   Login: (req: Request, res: Response) => {
     try {
