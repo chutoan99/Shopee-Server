@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class HomeCategory extends Model {}
   HomeCategory.init(
     {
-      catid: DataTypes.BIGINT,
+      catid: DataTypes.INTEGER,
       parent_catid: DataTypes.INTEGER,
       name: DataTypes.STRING,
       display_name: DataTypes.STRING,

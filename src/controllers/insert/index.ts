@@ -6,7 +6,7 @@ const banner = require('../../../../data/banner.json')
 const batch_list = require('../../../../data/batch_list.json')
 const search_suggestion = require('../../../../data/search_suggestion.json')
 const notify = require('../../../../data/notify.json')
-const flash_sale = require('../../../../data/flashSale/flash_sale.json')
+const flash_sale = require('../../../../data/flash_sale.json')
 const shopMall = require('../../../../data/shopMall.json')
 const Top_Product = require('../../../../data/top.json')
 

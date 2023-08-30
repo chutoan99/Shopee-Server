@@ -5,10 +5,7 @@ const RoomService = {
   GetRooms: async (userid: any) => {
     try {
       const ListRoom = await db.Room.findAll({
-        where: { userid: userid },
-        attributes: {
-          exclude: ['id', 'userid']
-        }
+        where: { userid: userid }
       })
       const ListRoomResponse: any[] = []
       await Promise.all(
@@ -30,7 +27,7 @@ const RoomService = {
         err: ListRoomResponse.length > 0 ? 0 : 1,
         msg: ListRoomResponse.length > 0 ? 'OK' : 'Failed to get all rooms.',
         total: ListRoomResponse.length > 0 ? ListRoomResponse.length : 0,
-        response: ListRoomResponse
+        response: ListRoom
       }
     } catch (error) {
       throw new Error('Failed to get all rooms.')

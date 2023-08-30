@@ -19,6 +19,7 @@ const UserController = {
   UpdateUser: async (req: any, res: Response) => {
     const fileData = req.file
     const { userid } = req.user
+
     try {
       let payload
       if (fileData) {

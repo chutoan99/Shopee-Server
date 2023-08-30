@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   class Room extends Model {}
   Room.init(
     {
-      roomid: DataTypes.STRING,
-      shopid: DataTypes.STRING,
+      roomid: DataTypes.INTEGER,
+      shopid: DataTypes.BIGINT,
       userid: DataTypes.STRING
     },
     {

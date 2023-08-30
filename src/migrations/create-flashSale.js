@@ -11,7 +11,7 @@ module.exports = {
       },
       itemid: { type: Sequelize.BIGINT },
       shopid: { type: Sequelize.BIGINT },
-      catid: { type: Sequelize.BIGINT },
+      catid: { type: Sequelize.INTEGER },
       name: { type: Sequelize.STRING(1000) },
       image: { type: Sequelize.STRING(1000) },
       price: { type: Sequelize.INTEGER },

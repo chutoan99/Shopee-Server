@@ -30,7 +30,7 @@ const ChatService = {
       },
       from_id: +payload.user.userid,
       from_user_name: payload.user.name,
-      to_id: +payload.shop.shopid,
+      to_id: +payload.shop.userid,
       to_user_name: payload.shop.username
     })
     await newChat.save()

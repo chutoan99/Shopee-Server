@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Shop.init(
     {
-      shopid: DataTypes.STRING,
+      shopid: DataTypes.BIGINT,
       userid: DataTypes.STRING,
       is_official_shop: DataTypes.BOOLEAN,
       item_count: DataTypes.INTEGER,

@@ -31,7 +31,7 @@ const AuthService = {
         access_token: token || null
       }
     } catch (error) {
-      throw new Error(`Failed to Delete Overview`)
+      throw new Error(`Failed to login`)
     }
   }
 }

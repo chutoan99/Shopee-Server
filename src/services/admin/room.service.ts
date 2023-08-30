@@ -15,7 +15,7 @@ const RoomService = {
           const user = await db.User.findOne({
             where: { userid: item.userid },
             attributes: {
-              exclude: ['id', 'createdAt', 'updatedAt']
+              exclude: ['id', 'createdAt', 'updatedAt',"password", 'refreshToken','passwordResetToken', 'passwordResetExpires','passwordChangedAt']
             }
           })
           const newItem = {

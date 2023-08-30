@@ -10,7 +10,7 @@ const configSocketIO = (server: any) => {
     console.log(socket.id, 'socket')
     //? Chat
     socket.on('message', async (response: any) => {
-      if (!response?.user?.userid) return
+      if (!+response?.user?.userid) return
       try {
         const item = await ChatService.SaveAndGetMessage(response)
         socket.emit('message', item)
@@ -20,6 +20,7 @@ const configSocketIO = (server: any) => {
     })
 
     socket.on('room', async (roomid: number) => {
+      console.log(roomid, 'roomidroomidroomid')
       const chatResponse = await ChatService.GetMessage(roomid)
       socket.emit('room', chatResponse)
     })

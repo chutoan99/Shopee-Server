@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       orderid: DataTypes.BIGINT,
       userid: DataTypes.STRING,
-      shopid: DataTypes.INTEGER,
+      shopid: DataTypes.BIGINT,
       shop_name: DataTypes.STRING,
       item_groups_id: DataTypes.STRING,
       amount: DataTypes.STRING,
