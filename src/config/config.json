@@ -1,11 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "yf7KLQVUexlcCOgkBTpn",
+    "password": "ahFGeGbDH2-a6a-4-Gb41gF1d-FcE2h2",
     "database": "railway",
-    "host": "containers-us-west-150.railway.app",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql",
-    "port": "7274",
+    "port": "43229",
     "logging": true,
     "pool": {
       "max": 30,
@@ -16,20 +16,20 @@
   },
   "test": {
     "username": "root",
-    "password": "yf7KLQVUexlcCOgkBTpn",
+    "password": "ahFGeGbDH2-a6a-4-Gb41gF1d-FcE2h2",
     "database": "railway",
-    "host": "containers-us-west-150.railway.app",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql",
-    "port": "7274",
+    "port": "43229",
     "logging": true
   },
   "production": {
     "username": "root",
-    "password": "yf7KLQVUexlcCOgkBTpn",
+    "password": "ahFGeGbDH2-a6a-4-Gb41gF1d-FcE2h2",
     "database": "railway",
-    "host": "containers-us-west-150.railway.app",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql",
-    "port": "7274",
+    "port": "43229",
     "logging": false
   }
 }
